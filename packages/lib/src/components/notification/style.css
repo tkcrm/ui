@@ -1,0 +1,28 @@
+.rc-notification {
+  @apply pointer-events-none fixed top-4 right-4 z-50 sm:top-6 sm:right-6;
+}
+.rc-notification-notice {
+  @apply pointer-events-auto relative mb-4 w-full max-w-sm overflow-hidden rounded-lg bg-white
+  p-4 text-sm shadow-lg ring-1 ring-black ring-opacity-5;
+}
+.rc-notification-notice-closable {
+  @apply pr-14;
+}
+.rc-notification-notice-close {
+  @apply absolute top-4 right-4 no-underline;
+}
+
+.rc-notification-fade-appear,
+.rc-notification-fade-enter {
+  @apply scale-95 opacity-0 duration-300 ease-in-out;
+}
+.rc-notification-fade-leave {
+  @apply scale-100 opacity-100 duration-300 ease-in-out;
+}
+.rc-notification-fade-appear.rc-notification-fade-appear-active,
+.rc-notification-fade-enter.rc-notification-fade-enter-active {
+  @apply scale-100 opacity-100;
+}
+.rc-notification-fade-leave.rc-notification-fade-leave-active {
+  @apply scale-95 opacity-0;
+}
