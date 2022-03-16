@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import classNames from "classnames";
 
 export declare type BadgeStyle =
@@ -8,7 +8,7 @@ export declare type BadgeStyle =
   | "warning"
   | "primary";
 
-type BadgeProps = {
+export type BadgeProps = {
   type?: BadgeStyle;
   className?: string;
 };
@@ -25,7 +25,7 @@ const getStyle = (type: BadgeStyle): string => {
   return styles[type];
 };
 
-export const Badge: React.FC<BadgeProps> = ({
+const Badge: React.FC<BadgeProps> = ({
   type = "primary",
   className,
   children,
@@ -42,3 +42,5 @@ export const Badge: React.FC<BadgeProps> = ({
     </span>
   );
 };
+
+export default Badge;

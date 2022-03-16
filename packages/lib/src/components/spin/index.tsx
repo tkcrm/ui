@@ -1,12 +1,12 @@
-import React from "react";
+import * as React from "react";
 import classNames from "classnames";
 
-type SpinProps = {
+export type SpinProps = {
   animate?: boolean;
   className?: string;
 };
 
-export const Spin: React.FC<SpinProps> = ({ animate, className }) => {
+const Spin: React.FC<SpinProps> = ({ animate, className }) => {
   return (
     <svg
       className={classNames(className, {
@@ -32,3 +32,5 @@ export const Spin: React.FC<SpinProps> = ({ animate, className }) => {
     </svg>
   );
 };
+
+export default Spin;

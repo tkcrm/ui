@@ -1,12 +1,12 @@
-import React from "react";
+import * as React from "react";
 import classNames from "classnames";
 
-type PageWrapperProps = {
+export type PageWrapperProps = {
   className?: string;
   max_width?: "7xl" | "md" | "lg";
 };
 
-export const PageWrapper: React.FC<PageWrapperProps> = ({
+const PageWrapper: React.FC<PageWrapperProps> = ({
   children,
   className,
   max_width,
@@ -27,3 +27,5 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({
     </div>
   );
 };
+
+export default PageWrapper;

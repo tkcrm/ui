@@ -1,13 +1,13 @@
-import React from "react";
+import * as React from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 
-import { Spin } from "../spin";
+import Spin from "../spin";
 import { SizeType } from "../../types/commonComponents";
 
-export declare type ButtonType = "button" | "link";
+export type ButtonType = "button" | "link";
 
-export declare type ButtonStyle =
+export type ButtonStyle =
   | "primary"
   | "secondary"
   | "danger"
@@ -16,7 +16,7 @@ export declare type ButtonStyle =
   | "white"
   | "transparent";
 
-export interface ButtonParameters {
+export interface ButtonProps {
   className?: string;
   size?: SizeType;
   type?: ButtonType;
@@ -61,7 +61,7 @@ const getStyle = (style: ButtonStyle): string => {
   return styles[style];
 };
 
-export const Button: React.FC<ButtonParameters> = ({
+const Button: React.FC<ButtonProps> = ({
   size = "md",
   type = "button",
   style = "primary",
@@ -122,3 +122,5 @@ export const Button: React.FC<ButtonParameters> = ({
     </button>
   );
 };
+
+export default Button;

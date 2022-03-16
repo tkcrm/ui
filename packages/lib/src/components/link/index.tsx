@@ -1,14 +1,17 @@
-import React from "react";
-import { Link as RLink, LinkProps } from "react-router-dom";
+import * as React from "react";
+import {
+  Link as ReactLink,
+  LinkProps as ReactLinkProps,
+} from "react-router-dom";
 import classNames from "classnames";
 
-export const Link: React.FC<{ to: string } & LinkProps> = ({
-  className,
-  children,
-  ...rest
-}) => {
+export interface LinkProps extends ReactLinkProps {
+  to: string;
+}
+
+const Link: React.FC<LinkProps> = ({ className, children, ...rest }) => {
   return (
-    <RLink
+    <ReactLink
       {...rest}
       className={classNames(
         "font-medium text-indigo-600 hover:text-indigo-900 ",
@@ -16,6 +19,8 @@ export const Link: React.FC<{ to: string } & LinkProps> = ({
       )}
     >
       {children}
-    </RLink>
+    </ReactLink>
   );
 };
+
+export default Link;

@@ -1,12 +1,12 @@
-import React from "react";
+import * as React from "react";
 import classNames from "classnames";
 
-type AvatarProps = {
+export type AvatarProps = {
   img?: string;
   className?: string;
 };
 
-export const Avatar: React.FC<AvatarProps> = ({ className, img, children }) => {
+const Avatar: React.FC<AvatarProps> = ({ className, img, children }) => {
   if (img) {
     return (
       <img
@@ -28,3 +28,5 @@ export const Avatar: React.FC<AvatarProps> = ({ className, img, children }) => {
     </div>
   );
 };
+
+export default Avatar;

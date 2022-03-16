@@ -1,7 +1,7 @@
-import { Draft, AnyModel } from "mobx-keystone";
+import type { Draft, AnyModel } from "mobx-keystone";
 import type { FieldProps as RCFieldProps } from "rc-field-form/lib/Field";
 import type { FormInstance, FormProps as RCFormProps } from "rc-field-form";
-import type { ButtonParameters } from "../button";
+import type { ButtonProps } from "../button";
 
 export interface FormDraft<T extends Record<any, any>> extends Draft<T> {
   form?: FormInstance;
@@ -17,14 +17,14 @@ export interface FormProps extends RCFormProps {
   debug?: boolean;
 }
 
-export interface SaveButtonProps extends ButtonParameters {
+export interface SaveButtonProps extends ButtonProps {
   draft?: FormDraft<any>;
   hideOnNotDirty?: boolean;
   className?: string;
   onSave?: () => Promise<void>;
 }
 
-export interface ResetButtonProps extends ButtonParameters {
+export interface ResetButtonProps extends ButtonProps {
   draft?: FormDraft<any>;
   hideOnNotDirty?: boolean;
   className?: string;

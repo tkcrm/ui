@@ -1,8 +1,8 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
+import * as React from "react";
 import classNames from "classnames";
+import { observer } from "mobx-react-lite";
 import { getSnapshot, isModel } from "mobx-keystone";
-import Form from "rc-field-form";
+import RCForm from "rc-field-form";
 import { Transition } from "@headlessui/react";
 
 import {
@@ -22,16 +22,16 @@ import {
   changeDraftFields,
 } from "./utils";
 
-import { Notification } from "../notification";
-import { Alert } from "../alert";
-import { Button } from "../button";
+import notification from "../notification";
+import Alert from "../alert";
+import Button from "../button";
 
 /**
  * Компонент поля в форме
  */
 export const FormField: React.FC<FieldData> = observer((field) => {
   return (
-    <Form.Field
+    <RCForm.Field
       {...field}
       //tooltip={field.settings?.hint}
       rules={getValidateRules(field)}
@@ -74,28 +74,25 @@ export const FormField: React.FC<FieldData> = observer((field) => {
           />
         )
       }
-    </Form.Field>
+    </RCForm.Field>
   );
 });
 
-/**
- * Компонент формы
- */
-const Component: React.FC<FormProps> = ({
-  draft,
-  groups,
-  model,
-  initialValues,
-  debug,
-}) => {
-  const [form] = Form.useForm();
+export interface IForm extends React.FC<FormProps> {
+  Field: React.ReactNode;
+  Save: React.ReactNode;
+  Reset: React.ReactNode;
+}
+
+const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
+  const [form] = RCForm.useForm();
   const fields = getFieldsFromGroups(groups);
 
   draft.form = form;
   draft.fields = fields;
 
   return (
-    <Form
+    <RCForm
       autoComplete="off"
       form={form}
       fields={fields}
@@ -216,7 +213,7 @@ const Component: React.FC<FormProps> = ({
           </div>
         </div>
       ))}
-    </Form>
+    </RCForm>
   );
 };
 
@@ -252,7 +249,7 @@ const SaveButton: React.FC<SaveButtonProps> = observer(
                 } catch {}
               })
               .catch((error) => {
-                Notification.error({
+                notification.error({
                   description: error.message,
                 });
               });
@@ -306,4 +303,8 @@ const ResetButton: React.FC<ResetButtonProps> = observer(
   }
 );
 
-export default { FormField, Component, SaveButton, ResetButton };
+Form.Field = FormField;
+Form.Save = SaveButton;
+Form.Reset = ResetButton;
+
+export default Form;

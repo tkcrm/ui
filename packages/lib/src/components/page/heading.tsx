@@ -1,17 +1,17 @@
-import React from "react";
+import * as React from "react";
 import classNames from "classnames";
-import { matchPath, useLocation } from "react-router-dom";
+import { useLocation, matchPath } from "react-router-dom";
 import { Route } from "../../types/route";
-import { Breadcrumb, BreadcrumbItem } from "../breadcrumb";
+import Breadcrumb, { BreadcrumbItem } from "../breadcrumb";
 
-type PageHeadingProps = {
+export type PageHeadingProps = {
   title?: string;
   className?: string;
   extra?: React.ReactNode;
   routes?: Route[];
 };
 
-export const PageHeading: React.FC<PageHeadingProps> = ({
+const PageHeading: React.FC<PageHeadingProps> = ({
   title,
   className,
   extra,
@@ -71,3 +71,5 @@ export const PageHeading: React.FC<PageHeadingProps> = ({
     </>
   );
 };
+
+export default PageHeading;

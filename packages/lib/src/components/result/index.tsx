@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import classNames from "classnames";
 import {
   ExclamationIcon,
@@ -6,9 +6,9 @@ import {
   CheckCircleIcon,
 } from "@heroicons/react/outline";
 
-type ResultType = "primary" | "info" | "success" | "error";
+export type ResultType = "primary" | "info" | "success" | "error";
 
-interface ResultProps {
+export interface ResultProps {
   type: ResultType;
   title: string;
   sub_title?: string;
@@ -42,12 +42,7 @@ const getIconByType = (type: ResultType): JSX.Element => {
   );
 };
 
-export const Result: React.FC<ResultProps> = ({
-  type,
-  title,
-  sub_title,
-  extra,
-}) => {
+const Result: React.FC<ResultProps> = ({ type, title, sub_title, extra }) => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       {getIconByType(type)}
@@ -57,3 +52,5 @@ export const Result: React.FC<ResultProps> = ({
     </div>
   );
 };
+
+export default Result;

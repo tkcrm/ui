@@ -1,6 +1,7 @@
-import React from "react";
+import * as React from "react";
 import classNames from "classnames";
 import { ExclamationIcon } from "@heroicons/react/outline";
+
 import { get } from "../../utils";
 
 export type ColumnProps<RecordType = any> = {
@@ -64,7 +65,7 @@ const Row: React.FC<RowProps> = ({ columns, data_item, className, model }) => {
   );
 };
 
-export const Table: React.FC<TableProps> = ({
+const Table: React.FC<TableProps> = ({
   columns,
   data,
   rowKey,
@@ -131,3 +132,5 @@ export const Table: React.FC<TableProps> = ({
     </div>
   );
 };
+
+export default Table;

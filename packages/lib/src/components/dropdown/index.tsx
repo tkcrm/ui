@@ -1,20 +1,20 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 
-type DropdownParameters = {
+export type DropdownProps = {
   menuButton?: React.ReactElement;
   menuText?: string;
   className?: string;
 };
 
-type MenuItemParameters = {
+export type MenuItemProps = {
   className?: string;
   onClick?: () => void;
 };
 
-export const Item: React.FC<MenuItemParameters> = ({
+export const Item: React.FC<MenuItemProps> = ({
   onClick,
   children,
   className,
@@ -48,7 +48,11 @@ export const Item: React.FC<MenuItemParameters> = ({
   );
 };
 
-const Wrap: React.FC<DropdownParameters> = ({
+export interface IDropdown extends React.FC<DropdownProps> {
+  Item: React.ReactNode;
+}
+
+const InternalDropdown: IDropdown = ({
   className,
   menuButton,
   menuText,
@@ -76,7 +80,7 @@ const Wrap: React.FC<DropdownParameters> = ({
         )}
       </Menu.Button>
       <Transition
-        as={Fragment}
+        as={React.Fragment}
         enter="transition ease-out duration-100"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"
@@ -95,4 +99,6 @@ const Wrap: React.FC<DropdownParameters> = ({
   );
 };
 
-export const Dropdown = Object.assign(Wrap, { Item });
+InternalDropdown.Item = Item;
+
+export default InternalDropdown;

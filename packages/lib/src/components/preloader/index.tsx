@@ -1,15 +1,16 @@
+import * as React from "react";
 import classNames from "classnames";
-import React from "react";
-import { Spin } from "../spin";
 
-type PagePreloaderProps = {
+import Spin from "../spin";
+
+export type PreloaderProps = {
   small?: boolean;
   fullScreenHeight?: boolean;
   fullContainerHeight?: boolean;
   className?: string;
 };
 
-export const PagePreloader: React.FC<PagePreloaderProps> = ({
+const Preloader: React.FC<PreloaderProps> = ({
   small,
   fullScreenHeight,
   fullContainerHeight,
@@ -34,3 +35,5 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
     />
   </div>
 );
+
+export default Preloader;

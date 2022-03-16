@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import classNames from "classnames";
 import RCNotification from "rc-notification";
 import { NotificationInstance } from "rc-notification/lib/Notification";
@@ -16,7 +16,7 @@ interface ComponentStyleParams {
   icon?: any;
 }
 
-interface NotificationProps {
+export interface NotificationProps {
   type: NotificationTypes;
   title: string;
   description?: string;
@@ -75,7 +75,7 @@ RCNotification.newInstance(
   }
 );
 
-const NotificationInternal = ({
+const Notification = ({
   title,
   description,
   type,
@@ -129,36 +129,31 @@ const NotificationInternal = ({
   });
 };
 
-const error = (props: CustomNotificationProps) =>
-  NotificationInternal({
+Notification.error = (props: CustomNotificationProps) =>
+  Notification({
     ...props,
     type: "error",
     title: props.title || "Error!",
   });
 
-const success = (props: CustomNotificationProps) =>
-  NotificationInternal({
+Notification.success = (props: CustomNotificationProps) =>
+  Notification({
     ...props,
     type: "success",
     title: props.title || "Success!",
   });
 
-const info = (props: CustomNotificationProps) =>
-  NotificationInternal({
+Notification.info = (props: CustomNotificationProps) =>
+  Notification({
     ...props,
     type: "info",
     title: props.title || "Info!",
   });
 
-const transparent = (props: NotificationProps) =>
-  NotificationInternal({
+Notification.transparent = (props: NotificationProps) =>
+  Notification({
     ...props,
     type: "transparent",
   });
 
-export const Notification = Object.assign(NotificationInternal, {
-  error,
-  success,
-  info,
-  transparent,
-});
+export default Notification;

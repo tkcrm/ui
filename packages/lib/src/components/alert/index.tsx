@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import classNames from "classnames";
 import {
   XCircleIcon,
@@ -9,7 +9,7 @@ import {
 
 type AlertType = "error" | "warning" | "success" | "info";
 
-interface AlertProps
+export interface AlertProps
   extends Omit<React.InputHTMLAttributes<HTMLDivElement>, "title"> {
   type: AlertType;
   title?: string;
@@ -59,7 +59,7 @@ const getParams = (type: AlertType): ComponentStyleParams => {
   return params[type];
 };
 
-export const Alert: React.FC<AlertProps> = ({ title, text, type }) => {
+const Alert: React.FC<AlertProps> = ({ title, text, type }) => {
   const params = getParams(type);
 
   return (
@@ -83,3 +83,5 @@ export const Alert: React.FC<AlertProps> = ({ title, text, type }) => {
     </div>
   );
 };
+
+export default Alert;

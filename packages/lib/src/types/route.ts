@@ -1,5 +1,5 @@
-import React from "react";
-import { RouteObject } from "react-router";
+import * as React from "react";
+import type { RouteObject } from "react-router-dom";
 
 export type RouteHook = (model: any, params: Record<string, any>) => void;
 

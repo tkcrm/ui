@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 import classNames from "classnames";
 import { Menu, Transition } from "@headlessui/react";
 import {
@@ -7,21 +7,21 @@ import {
   SortDescendingIcon,
 } from "@heroicons/react/solid";
 
-type SortType = "desc" | "asc";
+export type SortType = "desc" | "asc";
 
-type SortButtonParameters = {
+export type SortButtonProps = {
   active: SortType;
   className?: string;
   onChange?: (type: SortType) => void;
 };
 
-type MenuItemParameters = {
+type MenuItemProps = {
   Icon: any;
   title: SortType;
   onClick?: () => void;
 };
 
-const MenuItem: React.FC<MenuItemParameters> = ({ Icon, title, onClick }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ Icon, title, onClick }) => {
   return (
     <Menu.Item onClick={onClick}>
       {({ active }) => (
@@ -45,12 +45,12 @@ const MenuItem: React.FC<MenuItemParameters> = ({ Icon, title, onClick }) => {
   );
 };
 
-const menuItems: MenuItemParameters[] = [
+const menuItems: MenuItemProps[] = [
   { Icon: SortDescendingIcon, title: "desc" },
   { Icon: SortAscendingIcon, title: "asc" },
 ];
 
-export const SortButton: React.FC<SortButtonParameters> = ({
+const SortButton: React.FC<SortButtonProps> = ({
   className,
   active,
   onChange,
@@ -85,7 +85,7 @@ export const SortButton: React.FC<SortButtonParameters> = ({
         />
       </Menu.Button>
       <Transition
-        as={Fragment}
+        as={React.Fragment}
         enter="transition ease-out duration-100"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"
@@ -111,3 +111,5 @@ export const SortButton: React.FC<SortButtonParameters> = ({
     </Menu>
   );
 };
+
+export default SortButton;

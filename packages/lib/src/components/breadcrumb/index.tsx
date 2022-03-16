@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { ChevronRightIcon, HomeIcon } from "@heroicons/react/solid";
@@ -15,7 +15,7 @@ export type BreadcrumbProps = {
   classNameItem?: string;
 };
 
-export const Breadcrumb: React.FC<BreadcrumbProps> = ({
+const Breadcrumb: React.FC<BreadcrumbProps> = ({
   className,
   items,
 }): JSX.Element => {
@@ -54,3 +54,5 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
     </nav>
   );
 };
+
+export default Breadcrumb;

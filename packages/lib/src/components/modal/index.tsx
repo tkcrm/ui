@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import * as React from "react";
 import classNames from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -10,7 +10,7 @@ import {
 
 type ModalTypes = "danger" | "success" | "info";
 
-interface ModalProps {
+export interface ModalProps {
   show: boolean;
   onClose: (value: boolean) => void;
   type?: ModalTypes;
@@ -61,7 +61,12 @@ const Description: React.FC = ({ children }) => (
   </Dialog.Description>
 );
 
-const ModalInternal: React.FC<ModalProps> = ({
+export interface IModal extends React.FC<ModalProps> {
+  Title: React.ReactNode;
+  Description: React.ReactNode;
+}
+
+const Modal: IModal = ({
   show,
   footer,
   onClose,
@@ -69,12 +74,12 @@ const ModalInternal: React.FC<ModalProps> = ({
   hideCloseButton,
   type,
 }) => {
-  const focusRef = useRef(null);
+  const focusRef = React.useRef(null);
 
   const style = getStyle(type);
 
   return (
-    <Transition.Root show={show} as={Fragment}>
+    <Transition.Root show={show} as={React.Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 z-10 overflow-y-auto"
@@ -83,7 +88,7 @@ const ModalInternal: React.FC<ModalProps> = ({
       >
         <div className="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
-            as={Fragment}
+            as={React.Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -101,7 +106,7 @@ const ModalInternal: React.FC<ModalProps> = ({
             &#8203;
           </span>
           <Transition.Child
-            as={Fragment}
+            as={React.Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             enterTo="opacity-100 translate-y-0 sm:scale-100"
@@ -167,4 +172,7 @@ const ModalInternal: React.FC<ModalProps> = ({
   );
 };
 
-export const Modal = Object.assign(ModalInternal, { Title, Description });
+Modal.Title = Title;
+Modal.Description = Description;
+
+export default Modal;
