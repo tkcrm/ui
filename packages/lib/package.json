@@ -1,6 +1,6 @@
 {
   "name": "@tkcrm/ui",
-  "version": "0.0.1-alpha.16",
+  "version": "0.0.1",
   "description": "Tailwind React UI components",
   "title": "TKCRM UI",
   "keywords": [
@@ -85,7 +85,7 @@
     "@vitejs/plugin-react": "^1.2.0",
     "autoprefixer": "^10.4.4",
     "lodash": "^4.17.21",
-    "mobx": "^6.4.2",
+    "mobx": "^6.5.0",
     "mobx-keystone": "^0.67.1",
     "mobx-react": "^7.3.0",
     "postcss": "^8.4.12",
