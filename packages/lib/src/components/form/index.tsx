@@ -26,9 +26,6 @@ import { notification } from "../notification";
 import { Alert } from "../alert";
 import { Button } from "../button";
 
-/**
- * Компонент поля в форме
- */
 const FormField: React.FC<FieldData> = observer((field) => {
   return (
     <RCForm.Field
@@ -102,7 +99,6 @@ export const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
         for (const field of changed_fields as FieldData[]) {
           let result_value = field.value;
 
-          // Заплатка для Field.Boolean
           if (field.value?.target?.checked !== undefined) {
             result_value = field.value.target.checked;
           }
@@ -112,7 +108,7 @@ export const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
           ];
 
           /**
-           * Смотрим зависимые поля с миксинам
+           * Update dependent fields with mixins
            */
           const finded_field = findFieldInGroups(groups, field.name);
           if (finded_field?.dependenciesMixin) {
@@ -122,7 +118,7 @@ export const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
                 throw new TypeError(`undefined mixin name ${mixin.name}`);
               }
 
-              // Обновляем сразу несколько полей
+              // Update multiple fields at once
               for (const field_name of mixin.fieldNames) {
                 fields_to_update.push({
                   name: field_name,
@@ -137,11 +133,11 @@ export const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
           }
 
           /**
-           * Смотрим зависимые поля с кастомными реализациями
+           * Update dependent fields with custom implementations
            */
           if (finded_field?.dependenciesFieldsToUpdate) {
             for (const field_to_update of finded_field.dependenciesFieldsToUpdate) {
-              // Обновляем сразу несколько полей
+              // Update multiple fields at once
               for (const field_name of field_to_update.fieldNames) {
                 fields_to_update.push({
                   name: field_name,

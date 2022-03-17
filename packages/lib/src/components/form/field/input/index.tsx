@@ -159,13 +159,13 @@ export const InputValidate: FieldValidate<string> = async (field, value) => {
   }
 
   /**
-   * На данный момент нельзя прокинуть названия филда
-   * в сообщение об ошибке.
-   * Issue по этой теме можно найти тут
+   * Currently, you can't throw field names into an error message.
+   * Issue on this topic can be found here
    *
    * https://github.com/icebob/fastest-validator/issues/209
    *
-   * Ожидается, что появится поле `label` в схеме и тогда всё станет прекрасно
+   * It is expected that the `label` field will appear
+   * in the schema and then everything will be fine
    */
 
   switch (field.type) {

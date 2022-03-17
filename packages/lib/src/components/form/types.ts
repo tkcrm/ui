@@ -78,13 +78,11 @@ export interface FieldData extends FieldBaseProps {
   order?: number;
   settings?: Record<string, any>;
   /**
-   * Используем миксины, когда у нас одна и та же
-   * логика для обновления полей
+   * Use mixins when we have the same logic to update fields
    */
   dependenciesMixin?: DependenciesMixin[];
   /**
-   * Используем это, когда нам нужно кастомное решение
-   * для обновления полей
+   * Use this when we need a custom solution to update fields
    */
   dependenciesFieldsToUpdate?: DependenciesFieldsToUpdate[];
 }
@@ -94,38 +92,38 @@ export type MixinNames = any;
 
 export type MixinCallback = (
   /**
-   * Новое значение
+   * New value
    */
   value: any,
   /**
-   * Текущее значение в зависимом поле
+   * Current value in dependent field
    */
   currentValue?: any,
   draft?: FormDraft<any>
 ) => any;
 export interface DependenciesMixin {
   /**
-   * Массив с `path` к полям, которые хотим обновить
+   * Array with `path` to the fields we want to update
    */
   fieldNames: FieldNamePath[];
   /**
-   * Название нашего миксина
+   * Mixin name
    */
   name: MixinNames;
 }
 
 export interface DependenciesFieldsToUpdate {
   /**
-   * Массив с `path` к полям, которые хотим обновить
+   * Array with `path` to the fields we want to update
    */
   fieldNames: FieldNamePath[];
   callback: (
     /**
-     * Новое значение
+     * New value
      */
     value: any,
     /**
-     * Текущее значение в зависимом поле
+     * Current value in dependent field
      */
     currentValue: any,
     draft: FormDraft<any>
