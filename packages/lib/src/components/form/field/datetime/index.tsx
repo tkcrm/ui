@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 import dayjs from "dayjs";
 
-import { SizeType } from "types/commonComponents";
+import { SizeType } from "../../../../types/commonComponents";
 import { getSize } from "../utils";
 
 import weekOfYear from "dayjs/plugin/weekOfYear";

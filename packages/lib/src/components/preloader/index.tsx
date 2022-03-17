@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 
-import Spin from "../spin";
+import { Spin } from "../spin";
 
 export type PreloaderProps = {
   small?: boolean;
@@ -10,7 +10,7 @@ export type PreloaderProps = {
   className?: string;
 };
 
-const Preloader: React.FC<PreloaderProps> = ({
+export const Preloader: React.FC<PreloaderProps> = ({
   small,
   fullScreenHeight,
   fullContainerHeight,
@@ -35,5 +35,3 @@ const Preloader: React.FC<PreloaderProps> = ({
     />
   </div>
 );
-
-export default Preloader;

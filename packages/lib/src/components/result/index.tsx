@@ -42,7 +42,12 @@ const getIconByType = (type: ResultType): JSX.Element => {
   );
 };
 
-const Result: React.FC<ResultProps> = ({ type, title, sub_title, extra }) => {
+export const Result: React.FC<ResultProps> = ({
+  type,
+  title,
+  sub_title,
+  extra,
+}) => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       {getIconByType(type)}
@@ -52,5 +57,3 @@ const Result: React.FC<ResultProps> = ({ type, title, sub_title, extra }) => {
     </div>
   );
 };
-
-export default Result;

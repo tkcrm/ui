@@ -59,7 +59,7 @@ const getParams = (type: AlertType): ComponentStyleParams => {
   return params[type];
 };
 
-const Alert: React.FC<AlertProps> = ({ title, text, type }) => {
+export const Alert: React.FC<AlertProps> = ({ title, text, type }) => {
   const params = getParams(type);
 
   return (
@@ -83,5 +83,3 @@ const Alert: React.FC<AlertProps> = ({ title, text, type }) => {
     </div>
   );
 };
-
-export default Alert;

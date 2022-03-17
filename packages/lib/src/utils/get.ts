@@ -1,8 +1,8 @@
 import { isObservable } from "mobx";
 import { getSnapshot, applySnapshot } from "mobx-keystone";
+import { set } from "lodash";
 
-import set from "lodash/set";
-import { FieldNamePath } from "components/form/types";
+import { FieldNamePath } from "../components/form/types";
 
 export type GetParameters = (
   value: Record<string, any>,

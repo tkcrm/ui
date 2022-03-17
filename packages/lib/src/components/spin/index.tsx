@@ -6,7 +6,7 @@ export type SpinProps = {
   className?: string;
 };
 
-const Spin: React.FC<SpinProps> = ({ animate, className }) => {
+export const Spin: React.FC<SpinProps> = ({ animate, className }) => {
   return (
     <svg
       className={classNames(className, {
@@ -32,5 +32,3 @@ const Spin: React.FC<SpinProps> = ({ animate, className }) => {
     </svg>
   );
 };
-
-export default Spin;

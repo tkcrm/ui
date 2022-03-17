@@ -6,7 +6,7 @@ export type PageWrapperProps = {
   max_width?: "7xl" | "md" | "lg";
 };
 
-const PageWrapper: React.FC<PageWrapperProps> = ({
+export const PageWrapper: React.FC<PageWrapperProps> = ({
   children,
   className,
   max_width,
@@ -27,5 +27,3 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
     </div>
   );
 };
-
-export default PageWrapper;

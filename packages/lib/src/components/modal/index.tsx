@@ -62,11 +62,11 @@ const Description: React.FC = ({ children }) => (
 );
 
 export interface IModal extends React.FC<ModalProps> {
-  Title: React.ReactNode;
-  Description: React.ReactNode;
+  Title: React.FC;
+  Description: React.FC;
 }
 
-const Modal: IModal = ({
+export const Modal: IModal = ({
   show,
   footer,
   onClose,
@@ -174,5 +174,3 @@ const Modal: IModal = ({
 
 Modal.Title = Title;
 Modal.Description = Description;
-
-export default Modal;

@@ -22,14 +22,11 @@ import {
   changeDraftFields,
 } from "./utils";
 
-import notification from "../notification";
-import Alert from "../alert";
-import Button from "../button";
+import { notification } from "../notification";
+import { Alert } from "../alert";
+import { Button } from "../button";
 
-/**
- * Компонент поля в форме
- */
-export const FormField: React.FC<FieldData> = observer((field) => {
+const FormField: React.FC<FieldData> = observer((field) => {
   return (
     <RCForm.Field
       {...field}
@@ -79,12 +76,11 @@ export const FormField: React.FC<FieldData> = observer((field) => {
 });
 
 export interface IForm extends React.FC<FormProps> {
-  Field: React.ReactNode;
-  Save: React.ReactNode;
-  Reset: React.ReactNode;
+  Save: React.FC<SaveButtonProps>;
+  Reset: React.FC<ResetButtonProps>;
 }
 
-const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
+export const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
   const [form] = RCForm.useForm();
   const fields = getFieldsFromGroups(groups);
 
@@ -103,7 +99,6 @@ const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
         for (const field of changed_fields as FieldData[]) {
           let result_value = field.value;
 
-          // Заплатка для Field.Boolean
           if (field.value?.target?.checked !== undefined) {
             result_value = field.value.target.checked;
           }
@@ -113,7 +108,7 @@ const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
           ];
 
           /**
-           * Смотрим зависимые поля с миксинам
+           * Update dependent fields with mixins
            */
           const finded_field = findFieldInGroups(groups, field.name);
           if (finded_field?.dependenciesMixin) {
@@ -123,7 +118,7 @@ const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
                 throw new TypeError(`undefined mixin name ${mixin.name}`);
               }
 
-              // Обновляем сразу несколько полей
+              // Update multiple fields at once
               for (const field_name of mixin.fieldNames) {
                 fields_to_update.push({
                   name: field_name,
@@ -138,11 +133,11 @@ const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
           }
 
           /**
-           * Смотрим зависимые поля с кастомными реализациями
+           * Update dependent fields with custom implementations
            */
           if (finded_field?.dependenciesFieldsToUpdate) {
             for (const field_to_update of finded_field.dependenciesFieldsToUpdate) {
-              // Обновляем сразу несколько полей
+              // Update multiple fields at once
               for (const field_name of field_to_update.fieldNames) {
                 fields_to_update.push({
                   name: field_name,
@@ -303,8 +298,9 @@ const ResetButton: React.FC<ResetButtonProps> = observer(
   }
 );
 
-Form.Field = FormField;
 Form.Save = SaveButton;
 Form.Reset = ResetButton;
 
-export default Form;
+export { default as Field } from "./field";
+export * from "./types";
+export * from "./validator";
