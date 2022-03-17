@@ -49,7 +49,7 @@ export const Item: React.FC<MenuItemProps> = ({
 };
 
 export interface IDropdown extends React.FC<DropdownProps> {
-  Item: React.ReactNode;
+  Item: React.FC<MenuItemProps>;
 }
 
 const InternalDropdown: IDropdown = ({

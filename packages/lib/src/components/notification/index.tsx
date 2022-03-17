@@ -75,7 +75,7 @@ RCNotification.newInstance(
   }
 );
 
-const Notification = ({
+export const notification = ({
   title,
   description,
   type,
@@ -129,31 +129,29 @@ const Notification = ({
   });
 };
 
-Notification.error = (props: CustomNotificationProps) =>
-  Notification({
+notification.error = (props: CustomNotificationProps) =>
+  notification({
     ...props,
     type: "error",
     title: props.title || "Error!",
   });
 
-Notification.success = (props: CustomNotificationProps) =>
-  Notification({
+notification.success = (props: CustomNotificationProps) =>
+  notification({
     ...props,
     type: "success",
     title: props.title || "Success!",
   });
 
-Notification.info = (props: CustomNotificationProps) =>
-  Notification({
+notification.info = (props: CustomNotificationProps) =>
+  notification({
     ...props,
     type: "info",
     title: props.title || "Info!",
   });
 
-Notification.transparent = (props: NotificationProps) =>
-  Notification({
+notification.transparent = (props: NotificationProps) =>
+  notification({
     ...props,
     type: "transparent",
   });
-
-export default Notification;

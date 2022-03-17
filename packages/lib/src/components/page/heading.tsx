@@ -11,7 +11,7 @@ export type PageHeadingProps = {
   routes?: Route[];
 };
 
-const PageHeading: React.FC<PageHeadingProps> = ({
+export const PageHeading: React.FC<PageHeadingProps> = ({
   title,
   className,
   extra,
@@ -71,5 +71,3 @@ const PageHeading: React.FC<PageHeadingProps> = ({
     </>
   );
 };
-
-export default PageHeading;

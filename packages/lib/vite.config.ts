@@ -2,26 +2,21 @@ import path from "node:path";
 import typescript2 from "rollup-plugin-typescript2";
 import visualizer from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
+import pluginReact from "@vitejs/plugin-react";
 
-const resolvePath = (str: string) => path.resolve(__dirname, str);
+import { peerDependencies } from "./package.json";
 
 export default defineConfig({
   build: {
-    target: "node10",
+    target: "es2019",
     lib: {
-      entry: resolvePath("./src/index.ts"),
+      entry: path.resolve(__dirname, "src", "index.ts"),
       name: "@tkcrm/ui",
-      fileName: (format) => `tkcrm-ui.${format}.js`,
+      formats: ["es", "cjs"],
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "react-router-dom",
-        "mobx",
-        "mobx-keystone",
-        "mobx-react-lite",
-      ],
+      external: [...Object.keys(peerDependencies)],
       output: {
         globals: {
           react: "React",
@@ -30,13 +25,15 @@ export default defineConfig({
           mobx: "mobx",
           "mobx-keystone": "mobx-keystone",
           "mobx-react-lite": "mobx-react-lite",
+          lodash: "lodash",
         },
       },
     },
-    sourcemap: "inline",
-    minify: "esbuild",
   },
   plugins: [
+    pluginReact({
+      jsxRuntime: "classic",
+    }),
     { ...typescript2({}), apply: "build", enforce: "pre" },
     visualizer(),
   ],

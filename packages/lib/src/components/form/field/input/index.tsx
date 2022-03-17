@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 import { SearchIcon } from "@heroicons/react/solid";
 
-import { SizeType } from "types/commonComponents";
+import { SizeType } from "../../../../types/commonComponents";
 import Spin from "../../../spin";
 
 import { validator, ValidatorSchema } from "../../validator";

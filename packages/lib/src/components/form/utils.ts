@@ -1,7 +1,6 @@
 import { getSnapshot, applySnapshot } from "mobx-keystone";
 import { Rule } from "rc-field-form/lib/interface";
-import isEqual from "lodash/isEqual";
-import set from "lodash/set";
+import { set, isEqual } from "lodash";
 
 import {
   FormGroupProps,
@@ -10,16 +9,6 @@ import {
   FieldNamePath,
 } from "./types";
 import { field_validations } from "./field_extensions";
-
-/**
- * Возвращает строку, где первая буква будет заглавной
- *
- * @param string Строка
- * @returns
- */
-export const capitalizeFirstLetter = (string: string): string => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
 
 export const findFieldInGroups = (
   groups: FormGroupProps[],

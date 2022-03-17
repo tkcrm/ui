@@ -22,14 +22,14 @@ import {
   changeDraftFields,
 } from "./utils";
 
-import notification from "../notification";
+import { notification } from "../notification";
 import Alert from "../alert";
 import Button from "../button";
 
 /**
  * Компонент поля в форме
  */
-export const FormField: React.FC<FieldData> = observer((field) => {
+const FormField: React.FC<FieldData> = observer((field) => {
   return (
     <RCForm.Field
       {...field}
@@ -79,12 +79,11 @@ export const FormField: React.FC<FieldData> = observer((field) => {
 });
 
 export interface IForm extends React.FC<FormProps> {
-  Field: React.ReactNode;
-  Save: React.ReactNode;
-  Reset: React.ReactNode;
+  Save: React.FC<SaveButtonProps>;
+  Reset: React.FC<ResetButtonProps>;
 }
 
-const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
+export const Form: IForm = ({ draft, groups, model, initialValues, debug }) => {
   const [form] = RCForm.useForm();
   const fields = getFieldsFromGroups(groups);
 
@@ -303,8 +302,9 @@ const ResetButton: React.FC<ResetButtonProps> = observer(
   }
 );
 
-Form.Field = FormField;
 Form.Save = SaveButton;
 Form.Reset = ResetButton;
 
-export default Form;
+export { default as Field } from "./field";
+export * from "./types";
+export * from "./validator";

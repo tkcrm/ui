@@ -1,3 +1,6 @@
+// Styles
+import "./assets/css/style.css";
+
 // Components
 export type { AlertProps } from "./components/alert";
 export { default as Alert } from "./components/alert";
@@ -24,7 +27,7 @@ export type { ErrorBoundaryProps } from "./components/errorboundary";
 export { default as ErrorBoundary } from "./components/errorboundary";
 
 export type { IForm } from "./components/form";
-export { default as Form } from "./components/form";
+export * from "./components/form";
 
 export type { LinkProps } from "./components/link";
 export { default as Link } from "./components/link";

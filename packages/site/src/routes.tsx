@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "@tkcrm/ui/src/types/route";
+import type { Route } from "@tkcrm/ui";
 
 const Home = React.lazy(() => import("./components/Home"));
 const NotFound = React.lazy(() => import("./components/NotFound"));
