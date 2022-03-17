@@ -23,8 +23,8 @@ import {
 } from "./utils";
 
 import { notification } from "../notification";
-import Alert from "../alert";
-import Button from "../button";
+import { Alert } from "../alert";
+import { Button } from "../button";
 
 /**
  * Компонент поля в форме

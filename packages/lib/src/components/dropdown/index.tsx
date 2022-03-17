@@ -52,7 +52,7 @@ export interface IDropdown extends React.FC<DropdownProps> {
   Item: React.FC<MenuItemProps>;
 }
 
-const InternalDropdown: IDropdown = ({
+export const Dropdown: IDropdown = ({
   className,
   menuButton,
   menuText,
@@ -99,6 +99,4 @@ const InternalDropdown: IDropdown = ({
   );
 };
 
-InternalDropdown.Item = Item;
-
-export default InternalDropdown;
+Dropdown.Item = Item;

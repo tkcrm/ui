@@ -6,7 +6,7 @@ export type AvatarProps = {
   className?: string;
 };
 
-const Avatar: React.FC<AvatarProps> = ({ className, img, children }) => {
+export const Avatar: React.FC<AvatarProps> = ({ className, img, children }) => {
   if (img) {
     return (
       <img
@@ -28,5 +28,3 @@ const Avatar: React.FC<AvatarProps> = ({ className, img, children }) => {
     </div>
   );
 };
-
-export default Avatar;

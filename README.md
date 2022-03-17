@@ -6,7 +6,6 @@ Simple and feature-rich tailwind react components.
 
 ## Requirements
 
-- `npm 7+`
 - `React 17+`
 - `React Router 6+`
 - `mobx 6+`
@@ -99,6 +98,7 @@ notification.error({
 });
 
 notification.success({ title: "Successfully created" });
+
 notification.info({
     description: "Successfully created",
     image: "http://image_link/",
@@ -249,7 +249,7 @@ const FormData: React.FC = observer(() => {
 
 ```tsx
 import { useState } from "react";
-import { Button, Field, notification } from "@tkcrm/ui";
+import { Preloader, Button, Field, notification } from "@tkcrm/ui";
 
 const FormData: React.FC = observer(() => {
   const [loading, setLoading] = useState(false);

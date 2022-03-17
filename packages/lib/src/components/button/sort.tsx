@@ -50,7 +50,7 @@ const menuItems: MenuItemProps[] = [
   { Icon: SortAscendingIcon, title: "asc" },
 ];
 
-const SortButton: React.FC<SortButtonProps> = ({
+export const SortButton: React.FC<SortButtonProps> = ({
   className,
   active,
   onChange,
@@ -111,5 +111,3 @@ const SortButton: React.FC<SortButtonProps> = ({
     </Menu>
   );
 };
-
-export default SortButton;

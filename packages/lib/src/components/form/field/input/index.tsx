@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { SearchIcon } from "@heroicons/react/solid";
 
 import { SizeType } from "../../../../types/commonComponents";
-import Spin from "../../../spin";
+import { Spin } from "../../../spin";
 
 import { validator, ValidatorSchema } from "../../validator";
 import type { FieldValidate } from "../../types";

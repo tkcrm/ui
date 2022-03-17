@@ -1,6 +1,6 @@
 import * as React from "react";
-import Button from "../button";
-import Result from "../result";
+import { Button } from "../button";
+import { Result } from "../result";
 
 export type ErrorBoundaryProps = {
   title?: string;
@@ -8,7 +8,7 @@ export type ErrorBoundaryProps = {
   reloadPageText?: string;
 };
 
-class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
   constructor(properties: ErrorBoundaryProps) {
     super(properties);
   }
@@ -52,5 +52,3 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
     return this.props.children;
   }
 }
-
-export default ErrorBoundary;

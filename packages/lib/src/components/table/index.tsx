@@ -65,7 +65,7 @@ const Row: React.FC<RowProps> = ({ columns, data_item, className, model }) => {
   );
 };
 
-const Table: React.FC<TableProps> = ({
+export const Table: React.FC<TableProps> = ({
   columns,
   data,
   rowKey,
@@ -132,5 +132,3 @@ const Table: React.FC<TableProps> = ({
     </div>
   );
 };
-
-export default Table;

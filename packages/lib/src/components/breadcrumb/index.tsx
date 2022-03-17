@@ -15,7 +15,7 @@ export type BreadcrumbProps = {
   classNameItem?: string;
 };
 
-const Breadcrumb: React.FC<BreadcrumbProps> = ({
+export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   className,
   items,
 }): JSX.Element => {
@@ -54,5 +54,3 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
     </nav>
   );
 };
-
-export default Breadcrumb;

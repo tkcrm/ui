@@ -25,7 +25,7 @@ const getStyle = (type: BadgeStyle): string => {
   return styles[type];
 };
 
-const Badge: React.FC<BadgeProps> = ({
+export const Badge: React.FC<BadgeProps> = ({
   type = "primary",
   className,
   children,
@@ -42,5 +42,3 @@ const Badge: React.FC<BadgeProps> = ({
     </span>
   );
 };
-
-export default Badge;

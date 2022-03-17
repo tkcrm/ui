@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 import { useLocation, matchPath } from "react-router-dom";
 import { Route } from "../../types/route";
-import Breadcrumb, { BreadcrumbItem } from "../breadcrumb";
+import { Breadcrumb, BreadcrumbItem } from "../breadcrumb";
 
 export type PageHeadingProps = {
   title?: string;

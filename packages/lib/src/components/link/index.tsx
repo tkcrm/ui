@@ -9,7 +9,7 @@ export interface LinkProps extends ReactLinkProps {
   to: string;
 }
 
-const Link: React.FC<LinkProps> = ({ className, children, ...rest }) => {
+export const Link: React.FC<LinkProps> = ({ className, children, ...rest }) => {
   return (
     <ReactLink
       {...rest}
@@ -22,5 +22,3 @@ const Link: React.FC<LinkProps> = ({ className, children, ...rest }) => {
     </ReactLink>
   );
 };
-
-export default Link;

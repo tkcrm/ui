@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 
-import Spin from "../spin";
+import { Spin } from "../spin";
 import { SizeType } from "../../types/commonComponents";
 
 export type ButtonType = "button" | "link";
@@ -61,7 +61,7 @@ const getStyle = (style: ButtonStyle): string => {
   return styles[style];
 };
 
-const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   size = "md",
   type = "button",
   style = "primary",
@@ -122,5 +122,3 @@ const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-
-export default Button;
