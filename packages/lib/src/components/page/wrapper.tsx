@@ -1,10 +1,10 @@
 import * as React from "react";
 import classNames from "classnames";
 
-export type PageWrapperProps = {
+export interface PageWrapperProps {
   className?: string;
   max_width?: "7xl" | "md" | "lg";
-};
+}
 
 export const PageWrapper: React.FC<PageWrapperProps> = ({
   children,

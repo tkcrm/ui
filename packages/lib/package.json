@@ -1,6 +1,6 @@
 {
   "name": "@tkcrm/ui",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.2",
   "description": "Tailwind React UI components",
   "title": "TKCRM UI",
   "keywords": [
@@ -36,6 +36,7 @@
   "source": "./src/index.ts",
   "exports": {
     "./package.json": "./package.json",
+    "./dist/style.css": "./dist/style.css",
     ".": {
       "import": {
         "webpack": "./dist/index.es.js",

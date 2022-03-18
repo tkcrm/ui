@@ -4,12 +4,12 @@ import { useLocation, matchPath } from "react-router-dom";
 import { Route } from "../../types/route";
 import { Breadcrumb, BreadcrumbItem } from "../breadcrumb";
 
-export type PageHeadingProps = {
+export interface PageHeadingProps {
   title?: string;
   className?: string;
   extra?: React.ReactNode;
   routes?: Route[];
-};
+}
 
 export const PageHeading: React.FC<PageHeadingProps> = ({
   title,
