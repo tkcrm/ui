@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import { useLocation, matchPath } from "react-router-dom";
-import { Route } from "../../types/route";
+import type { Route } from "../../utils/routes";
 import { Breadcrumb, BreadcrumbItem } from "../breadcrumb";
 
 export interface PageHeadingProps {

@@ -1,11 +1,11 @@
 import { getSnapshot, applySnapshot } from "mobx-keystone";
-import { Rule } from "rc-field-form/lib/interface";
 import { set, isEqual } from "lodash";
+import type { Rule } from "rc-field-form/lib/interface";
 
 import {
   FormGroupProps,
   FieldData,
-  ChangeDraftFieldsParameters,
+  UpdateMobxKeystoneModelFieldsParameters,
   FieldNamePath,
 } from "./types";
 import { field_validations } from "./field_extensions";
@@ -40,6 +40,7 @@ export const getFieldsFromGroups = (groups: FormGroupProps[]): FieldData[] => {
   const fields: FieldData[] = [];
   for (const group of groups) {
     for (const field of group.fields) {
+      field.id = field.name.join("-");
       fields.push(field);
     }
   }
@@ -47,32 +48,44 @@ export const getFieldsFromGroups = (groups: FormGroupProps[]): FieldData[] => {
   return fields;
 };
 
-export const changeDraftFields: ChangeDraftFieldsParameters = (
-  draft,
-  fields_to_update
-) => {
-  try {
-    const snapshot = getSnapshot(draft.data);
-    for (const { name, value } of fields_to_update) {
-      set(snapshot, name, value);
+/**
+ * Update mobx keystone fields value
+ * @param model
+ * @param fields_to_update
+ */
+export const updateMobxKeystoneModelFields: UpdateMobxKeystoneModelFieldsParameters =
+  (model, fields_to_update) => {
+    try {
+      const snapshot = getSnapshot(model);
+
+      // for (const { name, value } of fields_to_update) {
+      //   set(snapshot, name, value);
+      // }
+
+      for (const [name, value] of Object.entries(fields_to_update)) {
+        set(snapshot, name, value);
+      }
+
+      applySnapshot(model, snapshot);
+    } catch (error: any) {
+      // console.error(
+      //   `${fields_to_update?.[0]?.name} error\n\n${error.message}`,
+      //   `\n\nwith value:\n${JSON.stringify(
+      //     fields_to_update?.[0]?.value,
+      //     null,
+      //     2
+      //   )}`
+      // );
+      console.error(
+        `${Object.keys(fields_to_update)?.[0]} error\n\n${error.message}`,
+        `\n\nwith value:\n${JSON.stringify(
+          fields_to_update[Object.keys(fields_to_update)?.[0]],
+          null,
+          2
+        )}`
+      );
     }
-
-    draft.form?.setFields(
-      fields_to_update.map(({ name, value }) => ({ name, value }))
-    );
-
-    applySnapshot(draft.data, snapshot);
-  } catch (error: any) {
-    console.error(
-      `${fields_to_update?.[0]?.name} error\n\n${error.message}`,
-      `\n\nwith value:\n${JSON.stringify(
-        fields_to_update?.[0]?.value,
-        null,
-        2
-      )}`
-    );
-  }
-};
+  };
 
 export const getColSizeStyle = (col_size: number): string | undefined => {
   const sizes: Record<number, string> = {

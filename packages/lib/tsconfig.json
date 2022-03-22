@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
+    "composite": true,
     "target": "esnext",
     "module": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
+    "noEmit": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "noEmit": true,
     "importHelpers": true,
     "declaration": true,
     "declarationDir": "./dist",
@@ -36,5 +37,5 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["./src"]
+  "include": ["src"]
 }

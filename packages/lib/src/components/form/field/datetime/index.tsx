@@ -6,6 +6,7 @@ import { SizeType } from "../../../../types/commonComponents";
 import { getSize } from "../utils";
 
 import weekOfYear from "dayjs/plugin/weekOfYear";
+import { FieldBaseProps, omit } from "../../../..";
 dayjs.extend(weekOfYear);
 
 type ComponentTypes = "date" | "datetime-local" | "time" | "month" | "week";
@@ -19,10 +20,11 @@ export interface DatetimeSettings {
 }
 
 export interface DatetimeProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    "size" | "value" | "onChange"
-  > {
+  extends FieldBaseProps,
+    Omit<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      "size" | "value" | "onChange" | "children" | "onReset"
+    > {
   value?: Date | string;
   onChange?: (value: string | null) => void;
   type: ComponentTypes;
@@ -46,8 +48,8 @@ const getFormat = (type: ComponentTypes): string => {
 const getFormatedValue = (
   value: string | Date | undefined,
   type: ComponentTypes
-): string | undefined => {
-  if (!value) return undefined;
+): string => {
+  if (!value) return "";
   let formated_value = dayjs(value).format(getFormat(type));
   if (type === "week") {
     formated_value = `${dayjs(value).year()}-W${dayjs(value).week()}`;
@@ -61,15 +63,15 @@ const Datetime: React.FC<DatetimeProps> = ({
   size = "md",
   value,
   onChange,
-  ...props
+  ...rest
 }) => {
   return (
     <input
-      {...props}
+      {...omit(rest, "instance")}
       min={settings?.min}
       max={settings?.max}
       step={settings?.step}
-      value={getFormatedValue(value, props.type)}
+      value={getFormatedValue(value, rest.type)}
       className={classNames(
         `block w-full appearance-none rounded-md border
        border-gray-300 placeholder-gray-400 shadow-sm
