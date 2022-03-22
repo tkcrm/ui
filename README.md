@@ -1,15 +1,8 @@
 # Tailwind UI React Components
 
-Simple and feature-rich tailwind react components.
+Simple and feature-rich tailwind react components
 
 > Documentation is under development
-
-## Requirements
-
-- `React 17+`
-- `React Router 6+`
-- `mobx 6+`
-- `mobx-keystone 0.67+`
 
 ## Installation
 
@@ -21,8 +14,8 @@ npm i @tkcrm/ui --save
 
 Add styles to your exist React project
 
-```jsx
-import Rreact from "react";
+```tsx
+import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -165,130 +158,252 @@ const MyComponent: React.FC = () => {
 
 ### Form
 
-Forms in `@tkcrm/ui` requires `mobx-keystone` model
+You can use forms with any state manager, for example `mobx-keystone`
 
-#### Define `mobx-keystone` model
+#### Define `mobx-keystone` model and a form configuration
 
-> TODO: add description
-
-#### Add configuration for your form
-
-```ts
+```tsx
 import type { FormGroupProps } from "@tkcrm/ui";
 
-const userFormConfig: FormGroupProps[] = [
+import { model, Model, prop, tProp, types } from "mobx-keystone";
+
+const userForm: FormGroupProps[] = [
   {
     title: "User info",
     fields: [
       {
         type: "text",
-        name: ["first_name"],
+        name: ["firstName"],
         label: "First name",
         required: true,
         colSize: 6,
       },
       {
         type: "text",
-        name: ["last_name"],
+        name: ["lastName"],
         label: "Last name",
-        required: true,
         colSize: 6,
       },
       {
         type: "number",
         name: ["age"],
-        label: "age",
+        label: "Age",
         colSize: 4,
-        settings: {
-          min: 1,
-        },
       },
       {
         type: "date",
         name: ["birthday"],
-        label: "birthday",
+        label: "Birthday",
+        required: true,
         colSize: 4,
       },
       {
-        type: "boolean",
-        name: ["is_active"],
-        label: "Is active",
+        type: "switch",
+        name: ["isActive"],
+        label: "Is Active",
+        colSize: 4,
+      },
+    ],
+  },
+  {
+    title: "Notification settings",
+    fields: [
+      {
+        type: "switch",
+        name: ["notifyEmail"],
+        label: "Email",
+        colSize: 4,
+      },
+      {
+        type: "switch",
+        name: ["notifySMS"],
+        label: "SMS",
+        colSize: 4,
+      },
+      {
+        type: "switch",
+        name: ["notifyPush"],
+        label: "Push",
         colSize: 4,
       },
     ],
   },
 ];
+
+const organizationForm: FormGroupProps[] = [
+  {
+    title: "Organization info",
+    fields: [
+      {
+        type: "text",
+        name: ["shortName"],
+        label: "Short name",
+        required: true,
+        colSize: 6,
+      },
+      {
+        type: "text",
+        name: ["fullName"],
+        label: "Full name",
+        colSize: 6,
+      },
+      {
+        type: "text",
+        name: ["address"],
+        label: "Address",
+        colSize: 10,
+      },
+      {
+        type: "switch",
+        name: ["isActive"],
+        label: "Is active",
+        colSize: 2,
+      },
+    ],
+  },
+];
+
+@model("frontend/user")
+export class UserModel extends Model({
+  firstName: tProp(types.string, "").withSetter(),
+  lastName: tProp(types.string, "").withSetter(),
+  age: tProp(types.number, 0).withSetter(),
+  birthday: tProp(types.maybe(types.dateString)).withSetter(),
+  isActive: tProp(types.boolean, false).withSetter(),
+  notifyEmail: tProp(types.boolean, false).withSetter(),
+  notifySMS: tProp(types.boolean, false).withSetter(),
+  notifyPush: tProp(types.boolean, false).withSetter(),
+}) {}
+
+@model("frontend/users")
+export class UsersModel extends Model({
+  getResponse: prop<UserModel>().withSetter(),
+}) {}
 ```
 
 #### Add form component
 
 ```tsx
 import { observer } from "mobx-react-lite";
-import { Preloader, Form } from "@tkcrm/ui";
+import { getSnapshot } from "mobx-keystone";
+import {
+  Form,
+  Page,
+  notification,
+  getFormInstance,
+  updateMobxKeystoneModelFields,
+  FormInstance,
+} from "@tkcrm/ui";
 
-const FormData: React.FC = observer(() => {
-  // Import mobx keystone user model
-  const { users } = useStore();
+interface FormProps {
+  instance: FormInstance;
+  onSave?: (values: Record<string, any>) => void;
+}
 
-  if (users.isLoading) {
-    return <Preloader fullContainerHeight />;
-  }
-
-  return (
-    <Form
-      model={users}
-      draft={users.draft}
-      initialValues={users.draft?.data.getInitialValues}
-      groups={userFormConfig}
-    />
-  );
-});
-```
-
-#### Use form without `mobx` and `configuration`
-
-```tsx
-import { useState } from "react";
-import { Preloader, Button, Field, notification } from "@tkcrm/ui";
-
-const FormData: React.FC = observer(() => {
-  const [loading, setLoading] = useState(false);
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
-
-  if (users.isLoading) {
-    return <Preloader fullContainerHeight />;
-  }
-
-  const handleUpdate = () => {
-    setLoading(true;)
-    setTimeout(() => {
-      setLoading(false);
-      notification.success({ title: "Successfully updated" });
-    }, 3000);
-  }
+const FormControls: React.FC<FormProps> = observer(({ instance, onSave }) => {
+  const handleUpdate = async (): Promise<boolean> => {
+    return new Promise((r) => {
+      setTimeout(() => {
+        notification.success({ title: "Successfully updated" });
+        r(true);
+      }, 300);
+    });
+  };
 
   return (
-    <div className="d-flex flex-col">
-        <Field.Input.Text
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
-        <Field.Input.Number
-          value={age}
-          onChange={(event) => setAge(event.target.value)}
-          className="mt-3"
-        />
-        <Button
-          rounded
-          bold
-          className="w-full justify-center"
-          onClick={handleUpdate}
-          loading={loading}
-          >
-            update
-        </Button>
+    <div className="mt-4 flex justify-end">
+      <Form.Reset instance={instance} className="mr-4">
+        Reset
+      </Form.Reset>
+      <Form.Save
+        instance={instance}
+        loading={instance.isLoading}
+        onSave={async (values) => {
+          await handleUpdate();
+          onSave?.(values);
+        }}
+      >
+        Save
+      </Form.Save>
     </div>
   );
 });
+
+const FormData: React.FC<FormProps> = ({ instance }) => {
+  return (
+    <>
+      <Form instance={instance} />
+      <FormControls instance={instance} />
+    </>
+  );
+};
+
+const Forms: React.FC = () => {
+  const userModel = new UsersModel({
+    getResponse: new UserModel({ firstName: "John" }),
+  });
+
+  let orgValues: Record<string, any> = {
+    shortName: "LLC Google inc.",
+    isActive: true,
+  };
+
+  const userFormInstance = getFormInstance(
+    userForm,
+    getSnapshot(userModel.getResponse),
+    {
+      formMessages: {
+        form_validation_error_description: "Ошибка валидации формы",
+      },
+    }
+  );
+
+  const orgFormInstance = getFormInstance(organizationForm, orgValues);
+
+  return (
+    <Page.Wrapper max_width="lg">
+      <Page.Heading title="Forms" />
+      {/* Mobx Keystone example */}
+      <FormData
+        instance={userFormInstance}
+        onSave={(values) => {
+          updateMobxKeystoneModelFields(userModel.getResponse, values);
+        }}
+      />
+
+      <div className="mt-8">
+        {/* Example without state manager */}
+        <FormData
+          instance={orgFormInstance}
+          onSave={(values) => {
+            orgValues = values;
+          }}
+        />
+      </div>
+    </Page.Wrapper>
+  );
+};
+```
+
+#### Translate form messages
+
+All form messages are available from here
+
+```tsx
+import { FormMessages } from "@tkcrm/ui"
+```
+
+Add a new messages to a new form instance
+
+```tsx
+const formInstance = getFormInstance(
+    userForm,
+    {},
+    {
+      formMessages: {
+        form_validation_error_title: "Validating rror!",
+        form_validation_error_description: "Form validating error",
+      },
+    }
+  );
 ```
