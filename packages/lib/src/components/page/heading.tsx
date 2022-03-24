@@ -1,22 +1,21 @@
 import * as React from "react";
 import classNames from "classnames";
 import { useLocation, matchPath } from "react-router-dom";
-import type { Route } from "../../utils/routes";
 import { Breadcrumb, BreadcrumbItem } from "../breadcrumb";
+import { UIContext } from "../..";
 
 export interface PageHeadingProps {
   title?: string;
   className?: string;
   extra?: React.ReactNode;
-  routes?: Route[];
 }
 
 export const PageHeading: React.FC<PageHeadingProps> = ({
   title,
   className,
   extra,
-  routes = [],
 }) => {
+  const { routes = [] } = React.useContext(UIContext);
   const location = useLocation();
 
   const breadcrumbItems: BreadcrumbItem[] = [];

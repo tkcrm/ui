@@ -9,7 +9,6 @@ import {
   FormInstance,
 } from "@tkcrm/ui";
 
-import { routes } from "@/routes";
 import {
   userForm,
   UserModel,
@@ -72,19 +71,14 @@ const Forms: React.FC = () => {
 
   const userFormInstance = getFormInstance(
     userForm,
-    getSnapshot(userModel.getResponse),
-    {
-      formMessages: {
-        form_validation_error_description: "Ошибка валидации формы",
-      },
-    }
+    getSnapshot(userModel.getResponse)
   );
 
   const orgFormInstance = getFormInstance(organizationForm, orgValues);
 
   return (
     <Page.Wrapper maxWidth="md">
-      <Page.Heading title="Forms" routes={routes} />
+      <Page.Heading title="Forms" />
 
       <div className="mb-5 text-xl font-semibold">Mobx Keystone example</div>
       <FormData

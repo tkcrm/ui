@@ -55,6 +55,13 @@ export const getFieldsFromGroups = (groups: FormGroupProps[]): FieldData[] => {
  */
 export const updateMobxKeystoneModelFields: UpdateMobxKeystoneModelFieldsParameters =
   (model, fields_to_update) => {
+    if (!model || !fields_to_update) {
+      console.error(
+        "updateMobxKeystoneModelFields error: empty model or fields"
+      );
+      return;
+    }
+
     try {
       const snapshot = getSnapshot(model);
 

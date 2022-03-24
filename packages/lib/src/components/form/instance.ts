@@ -1,4 +1,4 @@
-import { isEqual } from "lodash";
+import { isEqual, merge, set } from "lodash";
 import {
   action,
   IObservableValue,
@@ -7,23 +7,23 @@ import {
   toJS,
 } from "mobx";
 import type { FormInstance as RCFormInstance } from "rc-field-form";
+import { get } from "../..";
 
 import {
   FormGroupProps,
   FormInstanceParameters,
+  FormSettings,
   GetFormInstanceParameters,
 } from "./types";
 import { getFieldsFromGroups } from "./utils";
-import { FormMessages } from "./messages";
 
 export class FormInstance {
-  constructor({ groups, initialValues, options }: FormInstanceParameters) {
+  constructor({ groups, initialValues, settings }: FormInstanceParameters) {
     makeAutoObservable(this);
+    this.settings = settings || {};
     this.groups = groups;
-    this.initialValues = initialValues;
+    this.setInitalValues(initialValues || {});
     this.validatingFields = new Map();
-
-    this.formMessages = { ...FormMessages, ...options?.formMessages };
   }
 
   private dirty: IObservableValue<boolean> = observable.box(false);
@@ -32,13 +32,14 @@ export class FormInstance {
 
   form: RCFormInstance<any> | undefined;
   groups: FormGroupProps[];
-  initialValues: Record<string, any>;
-  formMessages: Record<string, string>;
+  initialValues: Record<string, any> = {};
+  settings: FormSettings;
 
   validatingFields: Map<string, any>;
 
-  setForm(form: RCFormInstance<any>) {
+  setForm(form: RCFormInstance<any>, defaultFormSettings: FormSettings) {
     this.form = form;
+    this.settings = merge(defaultFormSettings, this.settings);
     form.setFields(getFieldsFromGroups(this.groups));
     form.setFieldsValue(this.getInitialValues);
   }
@@ -104,7 +105,20 @@ export class FormInstance {
    */
   @action
   setInitalValues(v: Record<string, any>) {
-    this.initialValues = v;
+    const paths = toJS(this.groups).flatMap((group) =>
+      group.fields.map((field) => field.name)
+    );
+
+    if (this.settings.debug) {
+      console.log("initial field names:", paths);
+    }
+
+    const result_values: Record<string, any> = {};
+    for (const path of paths) {
+      set(result_values, path, get(v, path));
+    }
+
+    this.initialValues = result_values;
   }
 
   get getInitialValues() {
@@ -122,13 +136,12 @@ export class FormInstance {
 export const getFormInstance: GetFormInstanceParameters = (
   groups,
   initialValues,
-  options
+  settings
 ): FormInstance => {
-  delete initialValues["$modelType"];
   const form_instance = new FormInstance({
     initialValues,
     groups,
-    options,
+    settings,
   });
   return form_instance;
 };

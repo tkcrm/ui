@@ -11,7 +11,7 @@ import { FieldBaseProps } from "../..";
 export type SortType = "desc" | "asc";
 
 type ItemValue = {
-  type: any;
+  value: any;
   title: string;
 };
 
@@ -71,7 +71,7 @@ const menuItems: MenuItemProps[] = [
 
 const getType = (items: ItemsSettings, type: string | number): SortType => {
   return Object.entries(items).find(
-    ([_, value]) => value.type === type
+    ([_, { value }]) => value === type
   )?.[0] as SortType;
 };
 
@@ -134,7 +134,7 @@ export const SortButton: React.FC<SortButtonProps> = ({
                 {...item}
                 settings={settings}
                 onClick={() =>
-                  onChange?.(getExternalValue(settings.items, item.title).type)
+                  onChange?.(getExternalValue(settings.items, item.title).value)
                 }
               />
             ))}

@@ -10,17 +10,33 @@ Simple and feature-rich tailwind react components
 npm i @tkcrm/ui --save
 ```
 
-### Add styles
+### Add styles and context
 
-Add styles to your exist React project
+Add styles and context to your exist React project
 
 ```tsx
-import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ErrorBoundary, UIContext, UIContextClass } from "@tkcrm/ui";
 
-import "@tkcrm/ui/dist/style.css";
-// ...
+import App from "./components/App";
+
+// Routes are for breadcrumbs, where `routes: Route[]`
+// but this is optional
+import { routes } from "./routes";
+
+import "./assets/css/style.css";
+
+ReactDOM.render(
+  <ErrorBoundary>
+    <UIContext.Provider value={new UIContextClass({ routes })}>
+      <Router>
+        <App />
+      </Router>
+    </UIContext.Provider>
+  </ErrorBoundary>,
+  document.querySelector("#root")
+);
 ```
 
 or import from your exist base css file
@@ -90,7 +106,9 @@ notification.error({
   duration: 3000,
 });
 
-notification.success({ title: "Successfully created" });
+notification.success("Successfully created");
+
+notification.warning("Hmm...");
 
 notification.info({
     description: "Successfully created",

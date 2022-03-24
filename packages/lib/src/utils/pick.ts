@@ -1,6 +1,6 @@
 export const pick = <T extends object, K extends keyof T>(
-  whitelisted: K[],
   target: T,
+  whitelisted: K[],
   defaultValue?: any
 ) =>
   Object.fromEntries(

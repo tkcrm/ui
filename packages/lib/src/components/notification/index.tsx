@@ -8,18 +8,19 @@ import {
   InformationCircleIcon,
   XIcon,
 } from "@heroicons/react/outline";
+import { capitalizeFirstLetter } from "../..";
 
-type NotificationTypes = "error" | "success" | "info" | "transparent";
+type NotificationTypes = "error" | "success" | "info" | "warning" | "custom";
 
 interface ComponentStyleParams {
   icon_color?: string;
   icon?: any;
 }
 
-export interface NotificationProps {
+export interface NotificationParameters {
   type: NotificationTypes;
   title: string;
-  description?: string;
+  description?: string | null;
   className?: string;
   closeIcon?: boolean;
   duration?: number | null;
@@ -27,9 +28,19 @@ export interface NotificationProps {
   extra?: React.ReactNode;
 }
 
-type CustomNotificationProps = Omit<NotificationProps, "type" | "title"> & {
-  title?: string;
+type CustomNotificationParameters = Omit<
+  NotificationParameters,
+  "title" | "description"
+> & {
+  title?: string | null;
+  description?: string | null;
 };
+
+type CustomNotificationFunc = (
+  title?: string | null,
+  description?: string | null,
+  params?: CustomNotificationParameters
+) => void;
 
 const getStyle = (
   type?: NotificationTypes
@@ -41,6 +52,10 @@ const getStyle = (
       icon_color: "text-rose-400",
       icon: ExclamationIcon,
     },
+    warning: {
+      icon_color: "text-yellow-400",
+      icon: ExclamationIcon,
+    },
     success: {
       icon_color: "text-emerald-400",
       icon: CheckCircleIcon,
@@ -49,7 +64,7 @@ const getStyle = (
       icon_color: "text-cyan-400",
       icon: InformationCircleIcon,
     },
-    transparent: {},
+    custom: {},
   };
 
   return icons[type];
@@ -75,7 +90,16 @@ RCNotification.newInstance(
   }
 );
 
-export const notification = ({
+type NotificationFunc = (params: NotificationParameters) => void;
+interface INotification extends NotificationFunc {
+  error: CustomNotificationFunc;
+  warning: CustomNotificationFunc;
+  info: CustomNotificationFunc;
+  success: CustomNotificationFunc;
+  custom: (params: NotificationParameters) => void;
+}
+
+export const notification: INotification = ({
   title,
   description,
   type,
@@ -83,7 +107,7 @@ export const notification = ({
   duration,
   image,
   extra,
-}: NotificationProps): void => {
+}: NotificationParameters): void => {
   const notification: NotificationInstance = instance;
 
   const style = getStyle(type);
@@ -129,29 +153,28 @@ export const notification = ({
   });
 };
 
-notification.error = (props: CustomNotificationProps) =>
-  notification({
-    ...props,
-    type: "error",
-    title: props.title || "Error!",
-  });
+const getParams = (
+  params: CustomNotificationParameters
+): NotificationParameters => {
+  const result_params: NotificationParameters = {
+    ...params,
+    type: params.type,
+    title: params.title || capitalizeFirstLetter(params.type),
+  };
 
-notification.success = (props: CustomNotificationProps) =>
-  notification({
-    ...props,
-    type: "success",
-    title: props.title || "Success!",
-  });
+  return result_params;
+};
 
-notification.info = (props: CustomNotificationProps) =>
-  notification({
-    ...props,
-    type: "info",
-    title: props.title || "Info!",
-  });
+notification.error = (title, description, params) =>
+  notification(getParams({ ...params, title, description, type: "error" }));
 
-notification.transparent = (props: NotificationProps) =>
-  notification({
-    ...props,
-    type: "transparent",
-  });
+notification.success = (title, description, params) =>
+  notification(getParams({ ...params, title, description, type: "success" }));
+
+notification.info = (title, description, params) =>
+  notification(getParams({ ...params, title, description, type: "info" }));
+
+notification.warning = (title, description, params) =>
+  notification(getParams({ ...params, title, description, type: "warning" }));
+
+notification.custom = (params) => notification({ ...params, type: "custom" });

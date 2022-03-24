@@ -19,8 +19,11 @@ import { getValidateRules, getColSizeStyle, findFieldInGroups } from "./utils";
 import { notification } from "../notification";
 import { Alert } from "../alert";
 import { Button } from "../button";
+import { UIContext } from "../..";
 
 const FormField: React.FC<FieldData> = (field) => {
+  const { UITexts } = React.useContext(UIContext);
+
   return (
     <RCForm.Field
       {...field}
@@ -30,26 +33,30 @@ const FormField: React.FC<FieldData> = (field) => {
       {(props, meta) =>
         field_types[field.type] ? (
           <>
-            {React.cloneElement(field_types[field.type], {
-              ...props,
-              id: field.id,
-              name: field.id,
-              placeholder: field.placeholder || "type_field",
-              instance: field.instance,
-              className: [
-                props?.className,
-                meta.errors.length > 0 &&
-                  "border-rose-300 text-rose-900 placeholder-rose-300 focus:outline-none focus:ring-rose-500 focus:border-rose-500",
-              ]
-                .filter(Boolean)
-                .join(" "),
-              ...(field.settings && {
-                settings: {
-                  ...field_types[field.type].props.settings,
-                  ...field.settings,
-                },
-              }),
-            } as FieldBaseProps)}
+            <div>
+              {React.cloneElement(field_types[field.type], {
+                ...props,
+                id: field.id,
+                name: field.id,
+                placeholder: !field.instance?.settings.hidePlaceholders
+                  ? field.placeholder || UITexts.form.fill_field
+                  : "",
+                instance: field.instance,
+                className: [
+                  props?.className,
+                  meta.errors.length > 0 &&
+                    "border-rose-300 text-rose-900 placeholder-rose-300 focus:outline-none focus:ring-rose-500 focus:border-rose-500",
+                ]
+                  .filter(Boolean)
+                  .join(" "),
+                ...(field.settings && {
+                  settings: {
+                    ...field_types[field.type].props.settings,
+                    ...field.settings,
+                  },
+                }),
+              } as FieldBaseProps)}
+            </div>
             {meta.errors.map((error, index) => (
               <p
                 className="mt-2 break-words text-sm text-rose-600"
@@ -70,9 +77,13 @@ const FormField: React.FC<FieldData> = (field) => {
   );
 };
 
-export const Form: IForm = ({ instance, debug, onChange, ...props }) => {
+export const Form: IForm = ({ instance, onChange, ...props }) => {
   const [form] = RCForm.useForm();
-  instance.setForm(form);
+  const { defaultFormSettings } = React.useContext(UIContext);
+  if (!instance) {
+    return null;
+  }
+  instance.setForm(form, defaultFormSettings);
 
   return (
     <RCForm
@@ -147,7 +158,20 @@ export const Form: IForm = ({ instance, debug, onChange, ...props }) => {
             }
           }
 
-          if (debug) {
+          const is_equal_data = instance.isEqual(
+            instance.getInitialValues,
+            form.getFieldsValue()
+          );
+
+          instance.setIsDirty(!is_equal_data);
+
+          if (instance.settings?.debug) {
+            console.log(
+              "is_equal_data",
+              is_equal_data,
+              instance.getInitialValues,
+              form.getFieldsValue()
+            );
             console.log(
               `Key: ${field.name.join(".")}\n\nResult value: ${JSON.stringify(
                 result_value,
@@ -156,10 +180,6 @@ export const Form: IForm = ({ instance, debug, onChange, ...props }) => {
               )}`
             );
           }
-
-          instance.setIsDirty(
-            !instance.isEqual(instance.getInitialValues, form.getFieldsValue())
-          );
 
           form.setFields(
             fields_to_update.map(({ name, value }) => ({ name, value }))
@@ -216,6 +236,11 @@ export const Form: IForm = ({ instance, debug, onChange, ...props }) => {
 
 const SaveButton: React.FC<SaveButtonProps> = observer(
   ({ instance, hideOnNotDirty, children, onSave, ...rest }) => {
+    const { UITexts } = React.useContext(UIContext);
+    if (!instance) {
+      return null;
+    }
+
     return (
       <Transition
         show={hideOnNotDirty ? instance.isDirty : true}
@@ -240,22 +265,13 @@ const SaveButton: React.FC<SaveButtonProps> = observer(
                 try {
                   await onSave?.(instance.form?.getFieldsValue());
                   instance.saveForm();
-                } catch (error: any) {
-                  notification.error({
-                    title: instance.formMessages.form_validation_error_title,
-                    description:
-                      error.message ||
-                      instance.formMessages.form_validation_error_description,
-                  });
-                }
+                } catch {}
               })
               .catch((error) => {
-                notification.error({
-                  title: instance.formMessages.form_validation_error_title,
-                  description:
-                    error.message ||
-                    instance.formMessages.form_validation_error_description,
-                });
+                notification.error(
+                  UITexts.form.validation_error_title,
+                  error.message || UITexts.form.validation_error_description
+                );
               })
               .finally(() => {
                 instance.setIsValidating(false);
@@ -272,6 +288,10 @@ const SaveButton: React.FC<SaveButtonProps> = observer(
 
 const ResetButton: React.FC<ResetButtonProps> = observer(
   ({ instance, hideOnNotDirty, children, onReset, ...rest }) => {
+    if (!instance) {
+      return null;
+    }
+
     return (
       //<Tooltip title={t("fields:fields_values_will_be_reset")}>
       <Transition
@@ -309,5 +329,4 @@ export { default as Field } from "./field";
 export * from "./types";
 export * from "./instance";
 export * from "./validator";
-export * from "./messages";
 export { updateMobxKeystoneModelFields } from "./utils";

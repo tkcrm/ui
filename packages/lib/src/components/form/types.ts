@@ -4,27 +4,28 @@ import type { ButtonProps } from "../button";
 import React from "react";
 import type { FormInstance } from "./instance";
 
+export interface FormSettings {
+  debug?: boolean;
+  hidePlaceholders?: boolean;
+  texts?: Record<string, string>;
+}
+
 export interface FormInstanceParameters {
   groups: FormGroupProps[];
-  initialValues: Record<string, any>;
-  options?: {
-    formMessages?: Record<string, string>;
-  };
+  initialValues?: Record<string, any>;
+  settings?: FormSettings;
 }
 
 export type GetFormInstanceParameters = (
   groups: FormGroupProps[],
-  initialValues: Record<string, any>,
-  options?: {
-    formMessages?: Record<string, string>;
-  }
+  initialValues?: Record<string, any>,
+  settings?: FormSettings
 ) => FormInstance;
 
 export interface FormProps extends Omit<RCFormProps, "onChange"> {
-  instance: FormInstance;
+  instance?: FormInstance;
   onSubmit?: () => Promise<void>;
   onChange?: (fields: FieldsToUpdate[]) => void;
-  debug?: boolean;
 }
 
 export interface IForm extends React.FC<FormProps> {
@@ -33,14 +34,14 @@ export interface IForm extends React.FC<FormProps> {
 }
 
 export interface SaveButtonProps extends ButtonProps {
-  instance: FormInstance;
+  instance?: FormInstance;
   hideOnNotDirty?: boolean;
   className?: string;
   onSave?: (values: Record<string, any>) => Promise<void>;
 }
 
 export interface ResetButtonProps extends ButtonProps {
-  instance: FormInstance;
+  instance?: FormInstance;
   hideOnNotDirty?: boolean;
   className?: string;
   onReset?: () => void;
