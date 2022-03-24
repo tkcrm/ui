@@ -25,7 +25,7 @@ const FormControls: React.FC<FormProps> = observer(({ instance, onSave }) => {
   const handleUpdate = async (): Promise<boolean> => {
     return new Promise((r) => {
       setTimeout(() => {
-        notification.success({ title: "Successfully updated" });
+        notification.success("Successfully updated");
         r(true);
       }, 300);
     });

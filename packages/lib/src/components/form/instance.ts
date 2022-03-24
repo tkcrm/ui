@@ -22,7 +22,7 @@ export class FormInstance {
     makeAutoObservable(this);
     this.settings = settings || {};
     this.groups = groups;
-    this.setInitalValues(initialValues || {});
+    this.setInitialValues(initialValues || {});
     this.validatingFields = new Map();
   }
 
@@ -47,7 +47,7 @@ export class FormInstance {
   @action
   saveForm() {
     this.setIsDirty(false);
-    this.setInitalValues(this.form?.getFieldsValue());
+    this.setInitialValues(this.form?.getFieldsValue());
   }
 
   @action
@@ -104,7 +104,7 @@ export class FormInstance {
    * @param v
    */
   @action
-  setInitalValues(v: Record<string, any>) {
+  setInitialValues(v: Record<string, any>) {
     const paths = toJS(this.groups).flatMap((group) =>
       group.fields.map((field) => field.name)
     );
@@ -123,6 +123,16 @@ export class FormInstance {
 
   get getInitialValues() {
     return toJS(this.initialValues);
+  }
+
+  /**
+   * update initial values and rc form values
+   * @param v
+   */
+  @action
+  updateFormValues(v: Record<string, any>) {
+    this.setInitialValues(v);
+    this.form?.setFieldsValue(this.getInitialValues);
   }
 
   /**

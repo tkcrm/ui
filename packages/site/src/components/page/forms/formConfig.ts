@@ -1,5 +1,4 @@
 import type { FormGroupProps } from "@tkcrm/ui";
-
 import { model, Model, prop, tProp, types } from "mobx-keystone";
 
 export const userForm: FormGroupProps[] = [

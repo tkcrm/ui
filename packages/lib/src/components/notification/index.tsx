@@ -30,10 +30,14 @@ export interface NotificationParameters {
 
 type CustomNotificationParameters = Omit<
   NotificationParameters,
-  "title" | "description"
+  "type" | "title" | "description"
 > & {
   title?: string | null;
   description?: string | null;
+};
+
+type GetParamsType = Omit<NotificationParameters, "title"> & {
+  title?: string | null;
 };
 
 type CustomNotificationFunc = (
@@ -153,9 +157,7 @@ export const notification: INotification = ({
   });
 };
 
-const getParams = (
-  params: CustomNotificationParameters
-): NotificationParameters => {
+const getParams = (params: GetParamsType): NotificationParameters => {
   const result_params: NotificationParameters = {
     ...params,
     type: params.type,

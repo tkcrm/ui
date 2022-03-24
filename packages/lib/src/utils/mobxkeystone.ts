@@ -13,9 +13,8 @@ type RemoveKeystoneIdsResult<T> = Omit<T, "$modelType">;
 export const removeKeystoneIds = <T extends Record<string, any>>(
   obj: T
 ): RemoveKeystoneIdsResult<T> => {
-  return removeKeystoneIdsProcess(
-    getSnapshot(obj)
-  ) as RemoveKeystoneIdsResult<T>; // TODO. Fix it
+  const result = removeKeystoneIdsProcess(getSnapshot(obj));
+  return JSON.parse(JSON.stringify(result));
 };
 
 const removeKeystoneIdsProcess = <T extends Record<string, any>>(
@@ -34,6 +33,9 @@ const removeKeystoneIdsProcess = <T extends Record<string, any>>(
       (obj[propertyName] as Record<string, any>) = removeKeystoneIdsProcess(
         obj[propertyName]
       );
+    }
+    if (typeof obj[propertyName] === "bigint") {
+      obj[propertyName] = obj[propertyName].toString();
     }
   }
   return obj;
