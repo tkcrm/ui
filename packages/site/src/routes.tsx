@@ -1,19 +1,24 @@
 import React from "react";
 import type { Route } from "@tkcrm/ui";
 
-const Home = React.lazy(() => import("./components/Home"));
 const NotFound = React.lazy(() => import("./components/NotFound"));
 
 export const routes: Route[] = [
   {
     path: "/",
-    title: "home",
+    title: "Home",
     end: true,
-    element: <Home />,
+    lazy_element: import("@/components/Home"),
+  },
+  {
+    path: "/forms",
+    title: "Forms",
+    lazy_element: import("@/components/page/forms"),
   },
   {
     path: "*",
     title: "not_found",
+    unavailable: true,
     element: <NotFound />,
   },
 ];

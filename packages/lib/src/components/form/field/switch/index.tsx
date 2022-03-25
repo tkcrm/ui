@@ -2,7 +2,9 @@ import * as React from "react";
 import classNames from "classnames";
 import { Switch as UISwitch } from "@headlessui/react";
 
-export interface SwitchProps {
+import { FieldBaseProps } from "../../../..";
+
+export interface SwitchProps extends FieldBaseProps {
   className?: string;
   value?: boolean;
   onChange?: (value: boolean) => void;

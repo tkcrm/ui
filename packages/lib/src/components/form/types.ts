@@ -1,31 +1,47 @@
-import type { Draft, AnyModel } from "mobx-keystone";
 import type { FieldProps as RCFieldProps } from "rc-field-form/lib/Field";
-import type { FormInstance, FormProps as RCFormProps } from "rc-field-form";
+import type { FormProps as RCFormProps } from "rc-field-form";
 import type { ButtonProps } from "../button";
+import React from "react";
+import type { FormInstance } from "./instance";
 
-export interface FormDraft<T extends Record<any, any>> extends Draft<T> {
-  form?: FormInstance;
-  fields?: FieldData[];
-  changeFields?: (fieldsToUpdate: FieldsToUpdate[]) => void;
+export interface FormSettings {
+  debug?: boolean;
+  hidePlaceholders?: boolean;
+  texts?: Record<string, string>;
 }
 
-export interface FormProps extends RCFormProps {
-  draft: FormDraft<any>;
-  model: AnyModel;
+export interface FormInstanceParameters {
   groups: FormGroupProps[];
+  initialValues?: Record<string, any>;
+  settings?: FormSettings;
+}
+
+export type GetFormInstanceParameters = (
+  groups: FormGroupProps[],
+  initialValues?: Record<string, any>,
+  settings?: FormSettings
+) => FormInstance;
+
+export interface FormProps extends Omit<RCFormProps, "onChange"> {
+  instance: FormInstance;
   onSubmit?: () => Promise<void>;
-  debug?: boolean;
+  onChange?: (fields: FieldsToUpdate[]) => void;
+}
+
+export interface IForm extends React.FC<FormProps> {
+  Save: React.FC<SaveButtonProps>;
+  Reset: React.FC<ResetButtonProps>;
 }
 
 export interface SaveButtonProps extends ButtonProps {
-  draft?: FormDraft<any>;
+  instance: FormInstance;
   hideOnNotDirty?: boolean;
   className?: string;
-  onSave?: () => Promise<void>;
+  onSave?: (values: Record<string, any>) => Promise<void>;
 }
 
 export interface ResetButtonProps extends ButtonProps {
-  draft?: FormDraft<any>;
+  instance: FormInstance;
   hideOnNotDirty?: boolean;
   className?: string;
   onReset?: () => void;
@@ -54,9 +70,9 @@ export type FieldNamePath = (string | number)[];
 
 export interface FieldBaseProps extends RCFieldProps {
   id?: string;
-  name?: FieldNamePath;
-  model?: AnyModel;
-  draft?: FormDraft<any>;
+  name?: string;
+  instance?: FormInstance;
+  settings?: Record<string, any>;
 }
 
 export type FieldValidate<T> = (
@@ -64,7 +80,7 @@ export type FieldValidate<T> = (
   value: T
 ) => Promise<void | any> | void;
 
-export interface FieldData extends FieldBaseProps {
+export interface FieldData extends Omit<FieldBaseProps, "name"> {
   name: FieldNamePath;
   label: string | React.ReactNode;
   type: FieldTypes;
@@ -99,7 +115,7 @@ export type MixinCallback = (
    * Current value in dependent field
    */
   currentValue?: any,
-  draft?: FormDraft<any>
+  instance?: FormInstance
 ) => any;
 export interface DependenciesMixin {
   /**
@@ -126,7 +142,7 @@ export interface DependenciesFieldsToUpdate {
      * Current value in dependent field
      */
     currentValue: any,
-    draft: FormDraft<any>
+    instance: FormInstance
   ) => any;
 }
 
@@ -135,7 +151,7 @@ export interface FieldsToUpdate {
   value: any;
 }
 
-export type ChangeDraftFieldsParameters = (
-  draft: FormDraft<any>,
-  fieldsToUpdate: FieldsToUpdate[]
+export type UpdateMobxKeystoneModelFieldsParameters = (
+  draft: any,
+  fieldsToUpdate: Record<string, any>
 ) => void;

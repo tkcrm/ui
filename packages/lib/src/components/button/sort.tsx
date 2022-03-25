@@ -6,22 +6,41 @@ import {
   SortAscendingIcon,
   SortDescendingIcon,
 } from "@heroicons/react/solid";
+import { FieldBaseProps } from "../..";
 
 export type SortType = "desc" | "asc";
 
-export type SortButtonProps = {
-  active: SortType;
-  className?: string;
-  onChange?: (type: SortType) => void;
+type ItemValue = {
+  value: any;
+  title: string;
 };
+
+type ItemsSettings = Record<SortType, ItemValue>;
+
+interface SortButtonSettings {
+  items: ItemsSettings;
+}
+
+export interface SortButtonProps extends FieldBaseProps {
+  active: string | number;
+  className?: string;
+  onChange?: (type: any) => void;
+  settings: SortButtonSettings;
+}
 
 type MenuItemProps = {
   Icon: any;
   title: SortType;
   onClick?: () => void;
+  settings?: SortButtonSettings;
 };
 
-const MenuItem: React.FC<MenuItemProps> = ({ Icon, title, onClick }) => {
+const MenuItem: React.FC<MenuItemProps> = ({
+  Icon,
+  title,
+  onClick,
+  settings,
+}) => {
   return (
     <Menu.Item onClick={onClick}>
       {({ active }) => (
@@ -38,7 +57,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ Icon, title, onClick }) => {
             className={classNames("mr-2 h-5 w-5", { "text-gray-400": !active })}
             aria-hidden="true"
           />
-          {title}
+          {settings?.items[title].title || title}
         </button>
       )}
     </Menu.Item>
@@ -50,10 +69,21 @@ const menuItems: MenuItemProps[] = [
   { Icon: SortAscendingIcon, title: "asc" },
 ];
 
+const getType = (items: ItemsSettings, type: string | number): SortType => {
+  return Object.entries(items).find(
+    ([_, { value }]) => value === type
+  )?.[0] as SortType;
+};
+
+const getExternalValue = (items: ItemsSettings, type: SortType): ItemValue => {
+  return items[type];
+};
+
 export const SortButton: React.FC<SortButtonProps> = ({
   className,
   active,
   onChange,
+  settings,
 }) => {
   return (
     <Menu as="div" className={classNames("relative inline-block text-left")}>
@@ -66,13 +96,13 @@ export const SortButton: React.FC<SortButtonProps> = ({
           className
         )}
       >
-        {active === "desc" && (
+        {getType(settings.items, active) === "desc" && (
           <SortDescendingIcon
             className="h-5 w-5 text-gray-400"
             aria-hidden="true"
           />
         )}
-        {active === "asc" && (
+        {getType(settings.items, active) === "asc" && (
           <SortAscendingIcon
             className="h-5 w-5 text-gray-400"
             aria-hidden="true"
@@ -102,7 +132,10 @@ export const SortButton: React.FC<SortButtonProps> = ({
               <MenuItem
                 key={index}
                 {...item}
-                onClick={() => onChange?.(item.title)}
+                settings={settings}
+                onClick={() =>
+                  onChange?.(getExternalValue(settings.items, item.title).value)
+                }
               />
             ))}
           </div>

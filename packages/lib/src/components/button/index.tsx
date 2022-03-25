@@ -10,7 +10,7 @@ export type ButtonType = "button" | "link";
 export type ButtonStyle =
   | "primary"
   | "secondary"
-  | "danger"
+  | "error"
   | "success"
   | "info"
   | "white"
@@ -35,7 +35,7 @@ export interface ButtonProps {
 const getSize = (size: SizeType): string => {
   const sizes: Record<SizeType, string> = {
     sm: "px-2.5 py-1.5 text-xs",
-    md: "px-3 py-2 text-sm leading-4",
+    md: "px-3 py-2 text-sm",
     lg: "px-4 py-2 text-base",
     xl: "px-6 py-3 text-base",
   };
@@ -49,7 +49,7 @@ const getStyle = (style: ButtonStyle): string => {
       "text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 disabled:hover:bg-indigo-600",
     secondary:
       "text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:ring-indigo-500 focus:ring-indigo-500 disabled:hover:bg-indigo-100",
-    danger:
+    error:
       "text-white bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 disabled:hover:bg-rose-600",
     success:
       "text-emerald-700 bg-emerald-100 hover:bg-emerald-200 focus:ring-emerald-500 focus:ring-emerald-500 disabled:hover:bg-emerald-100",

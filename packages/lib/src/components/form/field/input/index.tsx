@@ -6,9 +6,24 @@ import { SizeType } from "../../../../types/commonComponents";
 import { Spin } from "../../../spin";
 
 import { validator, ValidatorSchema } from "../../validator";
-import type { FieldValidate } from "../../types";
+import type { FieldBaseProps, FieldValidate } from "../../types";
 import { getSize } from "../utils";
+import { omit } from "../../../..";
 
+interface BaseProps<T>
+  extends FieldBaseProps,
+    Omit<React.InputHTMLAttributes<T>, "size" | "children" | "onReset"> {}
+
+export interface InputBaseProps extends BaseProps<HTMLInputElement> {
+  size?: SizeType;
+  loading?: boolean;
+}
+
+export interface TextareaProps extends BaseProps<HTMLTextAreaElement> {
+  size?: SizeType;
+  settings?: InputStringSettings;
+  value?: string;
+}
 export interface InputStringSettings {
   min_symbols?: number;
   max_symbols?: number;
@@ -20,39 +35,28 @@ export interface InputNumberSettings {
   min?: number;
   max?: number;
 }
-export interface InputStringProps {
+export interface InputStringProps extends InputBaseProps {
   value?: string;
   settings?: InputStringSettings;
 }
 
-export interface InputNumberProps {
+export interface InputNumberProps extends Omit<InputBaseProps, "onChange"> {
   value?: number;
   onChange?: (v: number) => void;
   settings?: InputNumberSettings;
-}
-
-export interface InputBaseProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
-  size?: SizeType;
-  loading?: boolean;
-}
-
-export interface TextareaProps
-  extends Omit<React.InputHTMLAttributes<HTMLTextAreaElement>, "size"> {
-  size?: SizeType;
-  settings?: InputStringSettings;
-  value?: string;
 }
 
 const Input: React.FC<InputBaseProps> = ({
   placeholder,
   size = "md",
   className,
+  value = "",
   ...rest
 }) => {
   return (
     <input
-      {...rest}
+      {...omit(rest, "settings", "instance")}
+      value={value}
       placeholder={placeholder}
       className={classNames(
         `block w-full appearance-none rounded-md border
@@ -65,7 +69,7 @@ const Input: React.FC<InputBaseProps> = ({
   );
 };
 
-export const Text: React.FC<InputBaseProps & InputStringProps> = (rest) => (
+export const Text: React.FC<InputStringProps> = (rest) => (
   <>
     <Input {...rest} type="text" />
     {rest.settings?.max_symbols && (
@@ -75,13 +79,13 @@ export const Text: React.FC<InputBaseProps & InputStringProps> = (rest) => (
     )}
   </>
 );
-export const Password: React.FC<InputBaseProps & InputStringProps> = (rest) => (
+export const Password: React.FC<InputStringProps> = (rest) => (
   <Input {...rest} type="password" />
 );
-export const Email: React.FC<InputBaseProps & InputStringProps> = (rest) => (
+export const Email: React.FC<InputStringProps> = (rest) => (
   <Input {...rest} type="email" />
 );
-export const InputNumber: React.FC<InputBaseProps & InputNumberProps> = ({
+export const InputNumber: React.FC<InputNumberProps> = ({
   onChange,
   ...rest
 }) => (
@@ -95,7 +99,7 @@ export const InputNumber: React.FC<InputBaseProps & InputNumberProps> = ({
   />
 );
 
-export const Search: React.FC<InputBaseProps & InputStringProps> = ({
+export const Search: React.FC<InputStringProps> = ({
   className,
   loading,
   ...rest

@@ -8,7 +8,7 @@ import {
   CheckCircleIcon,
 } from "@heroicons/react/outline";
 
-type ModalTypes = "danger" | "success" | "info";
+type ModalTypes = "error" | "success" | "info";
 
 export interface ModalProps {
   show: boolean;
@@ -29,7 +29,7 @@ const getStyle = (type?: ModalTypes): ComponentStyleParams | undefined => {
   if (!type) return undefined;
 
   const icons: Record<ModalTypes, ComponentStyleParams> = {
-    danger: {
+    error: {
       bg: "bg-rose-100",
       icon_color: "text-rose-600",
       icon: ExclamationIcon,
