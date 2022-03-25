@@ -64,15 +64,15 @@ const Forms: React.FC = () => {
     getResponse: new UserModel({ firstName: "John" }),
   });
 
-  let orgValues: Record<string, any> = {
-    shortName: "LLC Google inc.",
-    isActive: true,
-  };
-
   const userFormInstance = getFormInstance(
     userForm,
     getSnapshot(userModel.getResponse)
   );
+
+  let orgValues: Record<string, any> = {
+    shortName: "LLC Google inc.",
+    isActive: true,
+  };
 
   const orgFormInstance = getFormInstance(organizationForm, orgValues);
 

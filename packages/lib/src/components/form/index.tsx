@@ -12,6 +12,7 @@ import {
   FieldData,
   FieldsToUpdate,
   FieldBaseProps,
+  FormProps,
 } from "./types";
 import { field_types, field_mixins } from "./field_extensions";
 import { getValidateRules, getColSizeStyle, findFieldInGroups } from "./utils";
@@ -77,10 +78,15 @@ const FormField: React.FC<FieldData> = (field) => {
   );
 };
 
-export const Form: IForm = ({ instance, onChange, ...props }) => {
+const InternalForm: React.FC<FormProps> = ({
+  instance,
+  onChange,
+  ...props
+}) => {
   const [form] = RCForm.useForm();
   const { defaultFormSettings } = React.useContext(UIContext);
   if (!instance) {
+    console.error("Form error: form instance is not defined");
     return null;
   }
   instance.setForm(form, defaultFormSettings);
@@ -238,6 +244,7 @@ const SaveButton: React.FC<SaveButtonProps> = observer(
   ({ instance, hideOnNotDirty, children, onSave, ...rest }) => {
     const { UITexts } = React.useContext(UIContext);
     if (!instance) {
+      console.error("SaveButton error: form instance is not defined");
       return null;
     }
 
@@ -289,6 +296,7 @@ const SaveButton: React.FC<SaveButtonProps> = observer(
 const ResetButton: React.FC<ResetButtonProps> = observer(
   ({ instance, hideOnNotDirty, children, onReset, ...rest }) => {
     if (!instance) {
+      console.error("ResetButton error: form instance is not defined");
       return null;
     }
 
@@ -322,8 +330,10 @@ const ResetButton: React.FC<ResetButtonProps> = observer(
   }
 );
 
-Form.Save = SaveButton;
-Form.Reset = ResetButton;
+export const Form: IForm = Object.assign(InternalForm, {
+  Save: SaveButton,
+  Reset: ResetButton,
+});
 
 export { default as Field } from "./field";
 export * from "./types";

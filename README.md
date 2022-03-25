@@ -131,11 +131,11 @@ const MyComponent: React.FC = () => {
       <Modal
         show={showModal}
         onClose={setShowModal}
-        type="danger"
+        type="error"
         footer={
           <>
             <Button
-              style="danger"
+              style="error"
               rounded
               loading={loading}
               onClick={() => {

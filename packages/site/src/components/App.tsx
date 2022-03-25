@@ -1,14 +1,14 @@
 import { Suspense, useState } from "react";
 import { useRoutes } from "react-router-dom";
 import { MenuIcon } from "@heroicons/react/outline";
-import { Preloader } from "@tkcrm/ui";
+import { Preloader, availableRoutes } from "@tkcrm/ui";
 
-import { routes } from "../routes";
+import { routes } from "@/routes";
 import Sidebar from "./ui/sidebar";
 
 const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const elements = useRoutes(routes);
+  const elements = useRoutes(availableRoutes(routes));
 
   return (
     <Suspense fallback={<Preloader fullScreenHeight />}>

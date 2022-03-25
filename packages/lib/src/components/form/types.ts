@@ -23,7 +23,7 @@ export type GetFormInstanceParameters = (
 ) => FormInstance;
 
 export interface FormProps extends Omit<RCFormProps, "onChange"> {
-  instance?: FormInstance;
+  instance: FormInstance;
   onSubmit?: () => Promise<void>;
   onChange?: (fields: FieldsToUpdate[]) => void;
 }
@@ -34,14 +34,14 @@ export interface IForm extends React.FC<FormProps> {
 }
 
 export interface SaveButtonProps extends ButtonProps {
-  instance?: FormInstance;
+  instance: FormInstance;
   hideOnNotDirty?: boolean;
   className?: string;
   onSave?: (values: Record<string, any>) => Promise<void>;
 }
 
 export interface ResetButtonProps extends ButtonProps {
-  instance?: FormInstance;
+  instance: FormInstance;
   hideOnNotDirty?: boolean;
   className?: string;
   onReset?: () => void;
