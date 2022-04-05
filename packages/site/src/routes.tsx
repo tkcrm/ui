@@ -11,6 +11,16 @@ export const routes: Route[] = [
     lazy_element: import("@/components/Home"),
   },
   {
+    path: "/alert",
+    title: "Alert",
+    lazy_element: import("@/components/page/alert"),
+  },
+  {
+    path: "/avatar",
+    title: "Avatar",
+    lazy_element: import("@/components/page/avatar"),
+  },
+  {
     path: "/forms",
     title: "Forms",
     lazy_element: import("@/components/page/forms"),

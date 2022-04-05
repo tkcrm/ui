@@ -85,11 +85,18 @@ const InternalForm: React.FC<FormProps> = ({
 }) => {
   const [form] = RCForm.useForm();
   const { defaultFormSettings } = React.useContext(UIContext);
+
+  React.useEffect(() => {
+    instance.setForm(form, defaultFormSettings);
+    return () => {
+      instance.clearForm();
+    };
+  }, [defaultFormSettings, form, instance]);
+
   if (!instance) {
     console.error("Form error: form instance is not defined");
     return null;
   }
-  instance.setForm(form, defaultFormSettings);
 
   return (
     <RCForm
@@ -190,6 +197,8 @@ const InternalForm: React.FC<FormProps> = ({
           form.setFields(
             fields_to_update.map(({ name, value }) => ({ name, value }))
           );
+
+          instance.setTempValues(form.getFieldsValue());
 
           onChange?.(fields_to_update);
         }

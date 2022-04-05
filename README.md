@@ -15,7 +15,7 @@ npm i @tkcrm/ui --save
 Add styles and context to your exist React project
 
 ```tsx
-import ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ErrorBoundary, UIContext, UIContextClass } from "@tkcrm/ui";
 
@@ -27,19 +27,22 @@ import { routes } from "./routes";
 
 import "./assets/css/style.css";
 
-ReactDOM.render(
-  <ErrorBoundary>
-    <UIContext.Provider value={new UIContextClass({ routes })}>
-      <Router>
-        <App />
-      </Router>
-    </UIContext.Provider>
-  </ErrorBoundary>,
-  document.querySelector("#root")
-);
+const rootElement = document.querySelector("#root");
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <ErrorBoundary>
+      <UIContext.Provider value={new UIContextClass({ routes })}>
+        <Router>
+          <App />
+        </Router>
+      </UIContext.Provider>
+    </ErrorBoundary>
+  );
+}
 ```
 
-or import from your exist base css file
+You can import styles from your exist base css file
 
 ```css
 @import "@tkcrm/ui/dist/style.css";
@@ -139,13 +142,12 @@ const MyComponent: React.FC = () => {
               rounded
               loading={loading}
               onClick={() => {
-                  setLoading(true);
-                  setTimeout(() => {
-                    setLoading(false);
-                    setShowModal(false);
-                  }, 3000)
-                }
-              }
+                setLoading(true);
+                setTimeout(() => {
+                  setLoading(false);
+                  setShowModal(false);
+                }, 3000);
+              }}
               className="ml-3"
             >
               {t("delete")}
@@ -408,20 +410,20 @@ const Forms: React.FC = () => {
 All form messages are available from here
 
 ```tsx
-import { FormMessages } from "@tkcrm/ui"
+import { FormMessages } from "@tkcrm/ui";
 ```
 
 Add a new messages to a new form instance
 
 ```tsx
 const formInstance = getFormInstance(
-    userForm,
-    {},
-    {
-      formMessages: {
-        form_validation_error_title: "Validating rror!",
-        form_validation_error_description: "Form validating error",
-      },
-    }
-  );
+  userForm,
+  {},
+  {
+    formMessages: {
+      form_validation_error_title: "Validating rror!",
+      form_validation_error_description: "Form validating error",
+    },
+  }
+);
 ```

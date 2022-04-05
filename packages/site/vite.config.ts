@@ -21,7 +21,6 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "react/jsx-runtime": "react/jsx-runtime.js",
       "@": path.resolve(__dirname, "src"),
       "@tkcrm/ui": path.resolve(__dirname, "../lib/src"),
     },

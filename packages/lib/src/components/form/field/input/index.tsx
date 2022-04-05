@@ -42,7 +42,7 @@ export interface InputStringProps extends InputBaseProps {
 
 export interface InputNumberProps extends Omit<InputBaseProps, "onChange"> {
   value?: number;
-  onChange?: (v: number) => void;
+  onChange?: (v: number | undefined) => void;
   settings?: InputNumberSettings;
 }
 
@@ -87,13 +87,14 @@ export const Email: React.FC<InputStringProps> = (rest) => (
 );
 export const InputNumber: React.FC<InputNumberProps> = ({
   onChange,
+  value = "",
   ...rest
 }) => (
   <Input
     {...rest}
-    value={rest.value ? String(rest.value) : ""}
+    value={value}
     onChange={(event) => {
-      onChange?.(Number(event.target.value));
+      onChange?.(Number(event.target.value) || undefined);
     }}
     type="number"
   />
