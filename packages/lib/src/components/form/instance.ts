@@ -33,6 +33,7 @@ export class FormInstance {
   form: RCFormInstance<any> | undefined;
   groups: FormGroupProps[];
   initialValues: Record<string, any> = {};
+  tempValues: Record<string, any> = {};
   settings: FormSettings;
 
   validatingFields: Map<string, any>;
@@ -40,8 +41,16 @@ export class FormInstance {
   setForm(form: RCFormInstance<any>, defaultFormSettings: FormSettings) {
     this.form = form;
     this.settings = merge(defaultFormSettings, this.settings);
+    this.setTempValues(this.getInitialValues);
     form.setFields(getFieldsFromGroups(this.groups));
     form.setFieldsValue(this.getInitialValues);
+  }
+
+  clearForm() {
+    this.form = undefined;
+    this.settings = {};
+    this.setInitialValues({});
+    this.setTempValues({});
   }
 
   @action
@@ -60,6 +69,7 @@ export class FormInstance {
     }
 
     this.form?.setFieldsValue(values);
+    this.setTempValues(values);
     this.setIsDirty(false);
   }
 
@@ -133,6 +143,21 @@ export class FormInstance {
   updateFormValues(v: Record<string, any>) {
     this.setInitialValues(v);
     this.form?.setFieldsValue(this.getInitialValues);
+  }
+
+  /**
+   * setFormInstanceValues
+   *
+   * internal function
+   * @param v
+   */
+  @action
+  setTempValues(v: Record<string, any>) {
+    this.tempValues = v;
+  }
+
+  get getTempValues() {
+    return toJS(this.tempValues);
   }
 
   /**

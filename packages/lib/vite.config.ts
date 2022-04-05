@@ -20,7 +20,7 @@ export default defineConfig({
       output: {
         globals: {
           react: "React",
-          "react-dom": "ReactDOM",
+          "react-dom": "ReactDOM/client",
           "react-router-dom": "react-router-dom",
           mobx: "mobx",
           "mobx-keystone": "mobx-keystone",

@@ -34,10 +34,10 @@ const getParams = (type: AlertType): ComponentStyleParams => {
       icon: XCircleIcon,
     },
     warning: {
-      bg: "bg-yelow-50",
-      icon_color: "text-yelow-400",
-      title_color: "text-yelow-800",
-      text_color: "text-yelow-700",
+      bg: "bg-yellow-50",
+      icon_color: "text-yellow-400",
+      title_color: "text-yellow-800",
+      text_color: "text-yellow-700",
       icon: ExclamationIcon,
     },
     info: {

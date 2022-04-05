@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 import { getSnapshot } from "mobx-keystone";
 import {
@@ -21,13 +22,43 @@ interface FormProps {
   onSave?: (values: Record<string, any>) => void;
 }
 
+const FormValuesDataItem: React.FC<{
+  title: string;
+  values: Record<string, any>;
+  className?: string;
+}> = observer(({ title, values, className }) => {
+  return (
+    <div className={classNames(className)}>
+      <h4 className="mb-2 text-lg font-medium">{title}</h4>
+      <pre className="max-w-full overflow-x-scroll rounded-md bg-slate-800 p-5 text-sm leading-6 text-slate-100">
+        <code>{JSON.stringify(values, null, 2)}</code>
+      </pre>
+    </div>
+  );
+});
+
+const FormValuesData: React.FC<FormProps> = observer(({ instance }) => {
+  return (
+    <>
+      <FormValuesDataItem
+        title="Initial values"
+        values={instance.getInitialValues}
+      />
+      <FormValuesDataItem
+        title="Form temp values"
+        values={instance.getTempValues}
+      />
+    </>
+  );
+});
+
 const FormControls: React.FC<FormProps> = observer(({ instance, onSave }) => {
   const handleUpdate = async (): Promise<boolean> => {
     return new Promise((r) => {
       setTimeout(() => {
         notification.success("Successfully updated");
         r(true);
-      }, 300);
+      }, 200);
     });
   };
 
@@ -50,14 +81,20 @@ const FormControls: React.FC<FormProps> = observer(({ instance, onSave }) => {
   );
 });
 
-const FormData: React.FC<FormProps> = ({ instance }) => {
-  return (
-    <>
-      <Form instance={instance} />
-      <FormControls instance={instance} />
-    </>
-  );
-};
+const FormData: React.FC<FormProps & { formTitle: string }> = observer(
+  ({ instance, formTitle }) => {
+    return (
+      <>
+        <div className="mb-5 text-xl font-semibold">{formTitle}</div>
+        <Form instance={instance} />
+        <FormControls instance={instance} />
+        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <FormValuesData instance={instance} />
+        </div>
+      </>
+    );
+  }
+);
 
 const Forms: React.FC = () => {
   const userModel = new UsersModel({
@@ -80,8 +117,8 @@ const Forms: React.FC = () => {
     <Page.Wrapper maxWidth="md">
       <Page.Heading title="Forms" />
 
-      <div className="mb-5 text-xl font-semibold">Mobx Keystone example</div>
       <FormData
+        formTitle="Mobx Keystone example"
         instance={userFormInstance}
         onSave={(values) => {
           updateMobxKeystoneModelFields(userModel.getResponse, values);
@@ -89,8 +126,8 @@ const Forms: React.FC = () => {
       />
 
       <div className="mt-8">
-        <div className="mb-5 text-xl font-semibold">Simple form example</div>
         <FormData
+          formTitle="Simple form example"
           instance={orgFormInstance}
           onSave={(values) => {
             orgValues = values;

@@ -107,3 +107,4 @@ build
 ./**/package-lock.json
 .DS_Store
 *.tsbuildinfo
+Makefile
