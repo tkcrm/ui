@@ -55,7 +55,7 @@ const Input: React.FC<InputBaseProps> = ({
 }) => {
   return (
     <input
-      {...omit(rest, "settings", "instance")}
+      {...omit(rest, "settings", "instance", "children")}
       value={value}
       placeholder={placeholder}
       className={classNames(
@@ -132,7 +132,7 @@ export const TextArea: React.FC<TextareaProps> = ({
   return (
     <>
       <textarea
-        {...rest}
+        {...omit(rest, "instance", "children")}
         className={classNames(
           `block w-full appearance-none rounded-md border
          border-gray-300 placeholder-gray-400 shadow-sm

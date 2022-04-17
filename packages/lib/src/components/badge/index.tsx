@@ -11,6 +11,7 @@ export declare type BadgeStyle =
 export type BadgeProps = {
   type?: BadgeStyle;
   className?: string;
+  children?: React.ReactNode;
 };
 
 const getStyle = (type: BadgeStyle): string => {

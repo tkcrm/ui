@@ -17,6 +17,7 @@ export interface ModalProps {
   className?: string;
   hideCloseButton?: boolean;
   footer?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 interface ComponentStyleParams {
@@ -49,21 +50,21 @@ const getStyle = (type?: ModalTypes): ComponentStyleParams | undefined => {
   return icons[type];
 };
 
-const Title: React.FC = ({ children }) => (
+const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
     {children}
   </Dialog.Title>
 );
 
-const Description: React.FC = ({ children }) => (
+const Description: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <Dialog.Description as="p" className="text-sm text-gray-500">
     {children}
   </Dialog.Description>
 );
 
 export interface IModal extends React.FC<ModalProps> {
-  Title: React.FC;
-  Description: React.FC;
+  Title: React.FC<{ children: React.ReactNode }>;
+  Description: React.FC<{ children: React.ReactNode }>;
 }
 
 export const Modal: IModal = ({
