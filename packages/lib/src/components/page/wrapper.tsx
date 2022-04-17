@@ -4,6 +4,7 @@ import classNames from "classnames";
 export interface PageWrapperProps {
   className?: string;
   maxWidth?: "7xl" | "md" | "lg";
+  children?: React.ReactNode;
 }
 
 export const PageWrapper: React.FC<PageWrapperProps> = ({

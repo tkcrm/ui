@@ -67,7 +67,7 @@ const Datetime: React.FC<DatetimeProps> = ({
 }) => {
   return (
     <input
-      {...omit(rest, "instance")}
+      {...omit(rest, "instance", "children")}
       min={settings?.min}
       max={settings?.max}
       step={settings?.step}

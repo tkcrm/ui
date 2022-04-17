@@ -4,6 +4,7 @@ import classNames from "classnames";
 export type AvatarProps = {
   img?: string;
   className?: string;
+  children?: React.ReactNode;
 };
 
 export const Avatar: React.FC<AvatarProps> = ({ className, img, children }) => {

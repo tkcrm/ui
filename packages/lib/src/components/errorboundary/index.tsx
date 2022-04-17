@@ -6,6 +6,7 @@ export type ErrorBoundaryProps = {
   title?: string;
   subTitle?: string;
   reloadPageText?: string;
+  children?: React.ReactNode;
 };
 
 export class ErrorBoundary extends React.Component<ErrorBoundaryProps> {

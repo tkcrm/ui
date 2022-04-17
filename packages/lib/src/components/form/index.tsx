@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import { toJS } from "mobx";
-import { observer } from "mobx-react-lite";
+import { mobxObserver } from "mobx-react-component";
 import RCForm from "rc-field-form";
 import { Transition } from "@headlessui/react";
 
@@ -220,7 +220,7 @@ const InternalForm: React.FC<FormProps> = ({
             <p className="mt-1 text-sm text-gray-500">{group.description}</p>
           )}
 
-          <div className="mt-4 shadow sm:overflow-hidden sm:rounded-md">
+          <div className="mt-4 shadow-sm sm:overflow-hidden sm:rounded-md">
             <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
               <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12">
                 {group.fields.map((field, index) => (
@@ -249,7 +249,7 @@ const InternalForm: React.FC<FormProps> = ({
   );
 };
 
-const SaveButton: React.FC<SaveButtonProps> = observer(
+const SaveButton: React.FC<SaveButtonProps> = mobxObserver(
   ({ instance, hideOnNotDirty, children, onSave, ...rest }) => {
     const { UITexts } = React.useContext(UIContext);
     if (!instance) {
@@ -302,7 +302,7 @@ const SaveButton: React.FC<SaveButtonProps> = observer(
   }
 );
 
-const ResetButton: React.FC<ResetButtonProps> = observer(
+const ResetButton: React.FC<ResetButtonProps> = mobxObserver(
   ({ instance, hideOnNotDirty, children, onReset, ...rest }) => {
     if (!instance) {
       console.error("ResetButton error: form instance is not defined");

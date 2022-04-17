@@ -7,11 +7,13 @@ export type DropdownProps = {
   menuButton?: React.ReactElement;
   menuText?: string;
   className?: string;
+  children?: React.ReactNode;
 };
 
 export type MenuItemProps = {
   className?: string;
   onClick?: () => void;
+  children?: React.ReactNode;
 };
 
 export const Item: React.FC<MenuItemProps> = ({

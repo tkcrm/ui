@@ -146,9 +146,8 @@ export class FormInstance {
   }
 
   /**
-   * setFormInstanceValues
+   * setTempValues
    *
-   * internal function
    * @param v
    */
   @action
@@ -161,7 +160,7 @@ export class FormInstance {
   }
 
   /**
-   * isEqual two objects
+   * return is equal two objects
    */
   isEqual(value: any, other: any): boolean {
     return isEqual(value, other);

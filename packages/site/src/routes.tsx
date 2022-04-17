@@ -21,6 +21,11 @@ export const routes: Route[] = [
     lazy_element: import("@/components/page/avatar"),
   },
   {
+    path: "/badge",
+    title: "Badge",
+    lazy_element: import("@/components/page/badge"),
+  },
+  {
     path: "/forms",
     title: "Forms",
     lazy_element: import("@/components/page/forms"),
