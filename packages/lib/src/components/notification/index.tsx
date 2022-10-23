@@ -4,10 +4,10 @@ import RCNotification from "rc-notification";
 import { NotificationInstance } from "rc-notification/lib/Notification";
 import {
   CheckCircleIcon,
-  ExclamationIcon,
+  ExclamationTriangleIcon,
   InformationCircleIcon,
-  XIcon,
-} from "@heroicons/react/outline";
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { capitalizeFirstLetter } from "../..";
 
 type NotificationTypes = "error" | "success" | "info" | "warning" | "custom";
@@ -54,11 +54,11 @@ const getStyle = (
   const icons: Record<NotificationTypes, ComponentStyleParams> = {
     error: {
       icon_color: "text-rose-400",
-      icon: ExclamationIcon,
+      icon: ExclamationTriangleIcon,
     },
     warning: {
       icon_color: "text-yellow-400",
-      icon: ExclamationIcon,
+      icon: ExclamationTriangleIcon,
     },
     success: {
       icon_color: "text-emerald-400",
@@ -85,7 +85,7 @@ RCNotification.newInstance(
       hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
         <span className="sr-only">Close</span>
-        <XIcon className="h-5 w-5" aria-hidden="true" />
+        <XMarkIcon className="h-5 w-5" aria-hidden="true" />
       </button>
     ),
   },

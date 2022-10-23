@@ -3,9 +3,9 @@ import classNames from "classnames";
 import { Menu, Transition } from "@headlessui/react";
 import {
   ChevronDownIcon,
-  SortAscendingIcon,
-  SortDescendingIcon,
-} from "@heroicons/react/solid";
+  BarsArrowUpIcon,
+  BarsArrowDownIcon,
+} from "@heroicons/react/24/solid";
 import { FieldBaseProps } from "../..";
 
 export type SortType = "desc" | "asc";
@@ -42,7 +42,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   settings,
 }) => {
   return (
-    <Menu.Item onClick={onClick}>
+    <Menu.Item>
       {({ active }) => (
         <button
           className={classNames(
@@ -52,6 +52,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
               "text-gray-700": !active,
             }
           )}
+          aria-hidden="true"
+          onClick={onClick}
         >
           <Icon
             className={classNames("mr-2 h-5 w-5", { "text-gray-400": !active })}
@@ -65,8 +67,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
 };
 
 const menuItems: MenuItemProps[] = [
-  { Icon: SortDescendingIcon, title: "desc" },
-  { Icon: SortAscendingIcon, title: "asc" },
+  { Icon: BarsArrowUpIcon, title: "desc" },
+  { Icon: BarsArrowDownIcon, title: "asc" },
 ];
 
 const getType = (items: ItemsSettings, type: string | number): SortType => {
@@ -97,13 +99,13 @@ export const SortButton: React.FC<SortButtonProps> = ({
         )}
       >
         {getType(settings.items, active) === "desc" && (
-          <SortDescendingIcon
+          <BarsArrowUpIcon
             className="h-5 w-5 text-gray-400"
             aria-hidden="true"
           />
         )}
         {getType(settings.items, active) === "asc" && (
-          <SortAscendingIcon
+          <BarsArrowDownIcon
             className="h-5 w-5 text-gray-400"
             aria-hidden="true"
           />

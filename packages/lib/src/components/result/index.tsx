@@ -1,10 +1,10 @@
 import * as React from "react";
 import classNames from "classnames";
 import {
-  ExclamationIcon,
+  ExclamationTriangleIcon,
   InformationCircleIcon,
   CheckCircleIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 
 export type ResultType = "primary" | "info" | "success" | "error";
 
@@ -31,7 +31,7 @@ const getIconByType = (type: ResultType): JSX.Element => {
     },
     error: {
       res_class: "text-gray-400",
-      Icon: ExclamationIcon,
+      Icon: ExclamationTriangleIcon,
     },
   };
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { SearchIcon } from "@heroicons/react/solid";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 import { SizeType } from "../../../../types/commonComponents";
 import { Spin } from "../../../spin";
@@ -111,7 +111,10 @@ export const Search: React.FC<InputStringProps> = ({
         {loading ? (
           <Spin className="h-5 w-5 text-gray-400" animate />
         ) : (
-          <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+          <MagnifyingGlassIcon
+            className="h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
         )}
       </div>
       <Input

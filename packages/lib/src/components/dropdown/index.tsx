@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
 
 export type DropdownProps = {
@@ -27,7 +27,7 @@ export const Item: React.FC<MenuItemProps> = ({
   }
 
   return (
-    <Menu.Item onClick={onClick}>
+    <Menu.Item>
       {({ active }) => (
         <div
           className={classNames(
@@ -37,6 +37,8 @@ export const Item: React.FC<MenuItemProps> = ({
             },
             className
           )}
+          aria-hidden="true"
+          onClick={onClick}
         >
           {React.cloneElement(children as React.ReactElement, {
             className: classNames(

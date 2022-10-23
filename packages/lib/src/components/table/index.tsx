@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { ExclamationIcon } from "@heroicons/react/outline";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 import { get } from "../../utils";
 
@@ -115,7 +115,7 @@ export const Table: React.FC<TableProps> = ({
                   <tr>
                     <td colSpan={columns.length} className="bg-white">
                       <div className="flex flex-col items-center justify-center py-6 text-sm text-gray-500">
-                        <ExclamationIcon
+                        <ExclamationTriangleIcon
                           className="h-16 w-16 text-indigo-600"
                           aria-hidden="true"
                         />
