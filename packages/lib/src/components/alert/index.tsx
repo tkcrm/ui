@@ -4,8 +4,8 @@ import {
   XCircleIcon,
   CheckCircleIcon,
   InformationCircleIcon,
-  ExclamationIcon,
-} from "@heroicons/react/outline";
+  ExclamationTriangleIcon,
+} from "@heroicons/react/24/outline";
 
 type AlertType = "error" | "warning" | "success" | "info";
 
@@ -38,7 +38,7 @@ const getParams = (type: AlertType): ComponentStyleParams => {
       icon_color: "text-yellow-400",
       title_color: "text-yellow-800",
       text_color: "text-yellow-700",
-      icon: ExclamationIcon,
+      icon: ExclamationTriangleIcon,
     },
     info: {
       bg: "bg-blue-50",

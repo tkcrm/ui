@@ -1,6 +1,6 @@
 import { Suspense, useState } from "react";
 import { useRoutes } from "react-router-dom";
-import { MenuIcon } from "@heroicons/react/outline";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Preloader, availableRoutes } from "@tkcrm/ui";
 
 import { routes } from "@/routes";
@@ -25,7 +25,7 @@ const App: React.FC = () => {
             onClick={() => setIsSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <MenuIcon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
         <main className="flex flex-1">

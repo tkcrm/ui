@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-import { ChevronRightIcon, HomeIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon, HomeIcon } from "@heroicons/react/24/solid";
 
 export type BreadcrumbItem = {
   name: string;

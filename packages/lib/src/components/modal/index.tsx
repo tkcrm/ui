@@ -2,11 +2,11 @@ import * as React from "react";
 import classNames from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 import {
-  XIcon,
-  ExclamationIcon,
+  XMarkIcon,
+  ExclamationTriangleIcon,
   InformationCircleIcon,
   CheckCircleIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 
 type ModalTypes = "error" | "success" | "info";
 
@@ -33,7 +33,7 @@ const getStyle = (type?: ModalTypes): ComponentStyleParams | undefined => {
     error: {
       bg: "bg-rose-100",
       icon_color: "text-rose-600",
-      icon: ExclamationIcon,
+      icon: ExclamationTriangleIcon,
     },
     success: {
       bg: "bg-indigo-100",
@@ -131,7 +131,7 @@ export const Modal: IModal = ({
                     onClick={() => onClose(false)}
                   >
                     <span className="sr-only">Close</span>
-                    <XIcon className="h-6 w-6" aria-hidden="true" />
+                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 )}
               </div>
