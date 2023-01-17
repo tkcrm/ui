@@ -1,10 +1,10 @@
-import * as React from "react";
-import classNames from "classnames";
 import {
+  CheckCircleIcon,
   ExclamationTriangleIcon,
   InformationCircleIcon,
-  CheckCircleIcon,
 } from "@heroicons/react/24/outline";
+import classNames from "classnames";
+import * as React from "react";
 
 export type ResultType = "primary" | "info" | "success" | "error";
 

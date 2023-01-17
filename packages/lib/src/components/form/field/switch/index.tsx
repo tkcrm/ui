@@ -1,6 +1,6 @@
-import * as React from "react";
-import classNames from "classnames";
 import { Switch as UISwitch } from "@headlessui/react";
+import classNames from "classnames";
+import * as React from "react";
 
 import { FieldBaseProps } from "../../../..";
 

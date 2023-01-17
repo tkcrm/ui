@@ -1,14 +1,14 @@
-import { getSnapshot, applySnapshot } from "mobx-keystone";
-import { set, isEqual } from "lodash";
+import { isEqual, set } from "lodash";
+import { applySnapshot, getSnapshot } from "mobx-keystone";
 import type { Rule } from "rc-field-form/lib/interface";
 
-import {
-  FormGroupProps,
-  FieldData,
-  UpdateMobxKeystoneModelFieldsParameters,
-  FieldNamePath,
-} from "./types";
 import { field_validations } from "./field_extensions";
+import {
+  FieldData,
+  FieldNamePath,
+  FormGroupProps,
+  UpdateMobxKeystoneModelFieldsParameters,
+} from "./types";
 
 export const findFieldInGroups = (
   groups: FormGroupProps[],

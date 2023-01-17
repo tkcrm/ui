@@ -1,4 +1,4 @@
-import { Page, Badge } from "@tkcrm/ui";
+import { Badge, Page } from "@tkcrm/ui";
 
 const PageComponent: React.FC = () => {
   return (

@@ -1,20 +1,20 @@
-import classNames from "classnames";
-import { observer } from "mobx-react-lite";
-import { getSnapshot } from "mobx-keystone";
 import {
   Form,
-  Page,
-  notification,
-  getFormInstance,
-  updateMobxKeystoneModelFields,
   FormInstance,
+  getFormInstance,
+  notification,
+  Page,
+  updateMobxKeystoneModelFields,
 } from "@tkcrm/ui";
+import classNames from "classnames";
+import { getSnapshot } from "mobx-keystone";
+import { observer } from "mobx-react-lite";
 
 import {
+  organizationForm,
   userForm,
   UserModel,
   UsersModel,
-  organizationForm,
 } from "./formConfig";
 
 interface FormProps {

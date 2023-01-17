@@ -1,12 +1,12 @@
-import * as React from "react";
-import classNames from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 import {
-  XMarkIcon,
+  CheckCircleIcon,
   ExclamationTriangleIcon,
   InformationCircleIcon,
-  CheckCircleIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
+import classNames from "classnames";
+import * as React from "react";
 
 type ModalTypes = "error" | "success" | "info";
 

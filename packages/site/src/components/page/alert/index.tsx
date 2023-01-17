@@ -1,4 +1,4 @@
-import { Page, Alert } from "@tkcrm/ui";
+import { Alert, Page } from "@tkcrm/ui";
 
 const alert_text = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
   Lorem Ipsum has been the industry's standard dummy text ever since the 1500s`;

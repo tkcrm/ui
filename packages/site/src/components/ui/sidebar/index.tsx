@@ -1,10 +1,10 @@
-import { Fragment } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { observer } from "mobx-react-lite";
-import classNames from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Route, availableRoutes } from "@tkcrm/ui";
+import { availableRoutes, Route } from "@tkcrm/ui";
+import classNames from "classnames";
+import { observer } from "mobx-react-lite";
+import { Fragment } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { routes } from "@/routes";
 

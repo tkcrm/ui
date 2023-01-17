@@ -1,11 +1,11 @@
-import * as React from "react";
-import classNames from "classnames";
 import { Menu, Transition } from "@headlessui/react";
 import {
-  ChevronDownIcon,
-  BarsArrowUpIcon,
   BarsArrowDownIcon,
+  BarsArrowUpIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/solid";
+import classNames from "classnames";
+import * as React from "react";
 import { FieldBaseProps } from "../..";
 
 export type SortType = "desc" | "asc";
@@ -67,8 +67,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
 };
 
 const menuItems: MenuItemProps[] = [
-  { Icon: BarsArrowUpIcon, title: "desc" },
-  { Icon: BarsArrowDownIcon, title: "asc" },
+  { Icon: BarsArrowDownIcon, title: "desc" },
+  { Icon: BarsArrowUpIcon, title: "asc" },
 ];
 
 const getType = (items: ItemsSettings, type: string | number): SortType => {
@@ -99,13 +99,13 @@ export const SortButton: React.FC<SortButtonProps> = ({
         )}
       >
         {getType(settings.items, active) === "desc" && (
-          <BarsArrowUpIcon
+          <BarsArrowDownIcon
             className="h-5 w-5 text-gray-400"
             aria-hidden="true"
           />
         )}
         {getType(settings.items, active) === "asc" && (
-          <BarsArrowDownIcon
+          <BarsArrowUpIcon
             className="h-5 w-5 text-gray-400"
             aria-hidden="true"
           />

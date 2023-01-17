@@ -19,12 +19,9 @@ export * from "./components/preloader";
 export * from "./components/result";
 export * from "./components/spin";
 export * from "./components/table";
-
-// Types
-export * from "./types";
-
-// Utils
-export * from "./utils";
-
 // Context
 export * from "./context";
+// Types
+export * from "./types";
+// Utils
+export * from "./utils";

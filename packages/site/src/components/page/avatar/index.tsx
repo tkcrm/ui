@@ -1,4 +1,4 @@
-import { Page, Avatar } from "@tkcrm/ui";
+import { Avatar, Page } from "@tkcrm/ui";
 
 const PageComponent: React.FC = () => {
   return (

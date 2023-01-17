@@ -1,7 +1,7 @@
-import type { FieldProps as RCFieldProps } from "rc-field-form/lib/Field";
 import type { FormProps as RCFormProps } from "rc-field-form";
-import type { ButtonProps } from "../button";
+import type { FieldProps as RCFieldProps } from "rc-field-form/lib/Field";
 import React from "react";
+import type { ButtonProps } from "../button";
 import type { FormInstance } from "./instance";
 
 export interface FormSettings {

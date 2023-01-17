@@ -1,8 +1,8 @@
-import React from "react";
 import { merge } from "lodash";
+import React from "react";
 
-import { UITextsType, UITexts as DefaultUITexts } from "../texts";
 import type { FormSettings, Route } from "..";
+import { UITexts as DefaultUITexts, UITextsType } from "../texts";
 
 interface UIContextParameters {
   routes?: Route[];

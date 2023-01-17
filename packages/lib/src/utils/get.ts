@@ -1,6 +1,6 @@
-import { isObservable } from "mobx";
-import { getSnapshot, applySnapshot } from "mobx-keystone";
 import { set } from "lodash";
+import { isObservable } from "mobx";
+import { applySnapshot, getSnapshot } from "mobx-keystone";
 
 import { FieldNamePath } from "../components/form/types";
 
