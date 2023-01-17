@@ -1,4 +1,4 @@
-import { SizeType } from "../../../../types/commonComponents";
+import type { SizeType } from "../../../../types/commonComponents";
 
 export const getSize = (size: SizeType): string => {
   const sizes: Record<SizeType, string> = {

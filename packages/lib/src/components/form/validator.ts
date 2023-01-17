@@ -1,4 +1,4 @@
-import { ValidationSchema } from "fastest-validator";
+import type { ValidationSchema } from "fastest-validator";
 import FastestValidator from "fastest-validator";
 
 export type ValidatorSchema = ValidationSchema;

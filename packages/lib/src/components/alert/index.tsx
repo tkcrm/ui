@@ -1,11 +1,11 @@
-import * as React from "react";
-import classNames from "classnames";
 import {
-  XCircleIcon,
   CheckCircleIcon,
-  InformationCircleIcon,
   ExclamationTriangleIcon,
+  InformationCircleIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
+import classNames from "classnames";
+import * as React from "react";
 
 type AlertType = "error" | "warning" | "success" | "info";
 

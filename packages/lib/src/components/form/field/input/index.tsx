@@ -1,14 +1,14 @@
-import * as React from "react";
-import classNames from "classnames";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import classNames from "classnames";
+import * as React from "react";
 
 import { SizeType } from "../../../../types/commonComponents";
 import { Spin } from "../../../spin";
 
-import { validator, ValidatorSchema } from "../../validator";
-import type { FieldBaseProps, FieldValidate } from "../../types";
-import { getSize } from "../utils";
 import { omit } from "../../../..";
+import type { FieldBaseProps, FieldValidate } from "../../types";
+import { validator, ValidatorSchema } from "../../validator";
+import { getSize } from "../utils";
 
 interface BaseProps<T>
   extends FieldBaseProps,
@@ -160,10 +160,10 @@ export const TextArea: React.FC<TextareaProps> = ({
 export const InputValidate: FieldValidate<string> = async (field, value) => {
   const schema: ValidatorSchema = { $$async: true, field: field.label };
 
-  if (!field.required) {
-    schema.optional = true;
-  } else {
+  if (field.required) {
     schema.empty = false;
+  } else {
+    schema.optional = true;
   }
 
   /**

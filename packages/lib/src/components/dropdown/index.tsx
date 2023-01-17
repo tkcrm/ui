@@ -1,11 +1,12 @@
-import * as React from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
+import * as React from "react";
 
 export type DropdownProps = {
   menuButton?: React.ReactElement;
   menuText?: string;
+  position?: "right" | "left";
   className?: string;
   children?: React.ReactNode;
 };
@@ -61,6 +62,7 @@ export const Dropdown: IDropdown = ({
   menuButton,
   menuText,
   children,
+  position,
 }) => {
   return (
     <Menu
@@ -93,8 +95,14 @@ export const Dropdown: IDropdown = ({
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y
-        divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className={classNames(
+            `absolute z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md
+           bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`,
+            {
+              "left-0 origin-top-left": position == "left",
+              "right-0 origin-top-right": position != "left",
+            }
+          )}
         >
           <div className="py-1">{children}</div>
         </Menu.Items>

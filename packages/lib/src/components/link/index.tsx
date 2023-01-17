@@ -1,9 +1,9 @@
+import classNames from "classnames";
 import * as React from "react";
 import {
   Link as ReactLink,
   LinkProps as ReactLinkProps,
 } from "react-router-dom";
-import classNames from "classnames";
 
 export interface LinkProps extends ReactLinkProps {
   to: string;

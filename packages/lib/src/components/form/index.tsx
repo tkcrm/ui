@@ -1,26 +1,26 @@
-import * as React from "react";
+import { Transition } from "@headlessui/react";
 import classNames from "classnames";
 import { toJS } from "mobx";
 import { mobxObserver } from "mobx-react-component";
 import RCForm from "rc-field-form";
-import { Transition } from "@headlessui/react";
+import * as React from "react";
 
+import { field_mixins, field_types } from "./field_extensions";
 import {
-  IForm,
-  SaveButtonProps,
-  ResetButtonProps,
+  FieldBaseProps,
   FieldData,
   FieldsToUpdate,
-  FieldBaseProps,
   FormProps,
+  IForm,
+  ResetButtonProps,
+  SaveButtonProps,
 } from "./types";
-import { field_types, field_mixins } from "./field_extensions";
-import { getValidateRules, getColSizeStyle, findFieldInGroups } from "./utils";
+import { findFieldInGroups, getColSizeStyle, getValidateRules } from "./utils";
 
-import { notification } from "../notification";
+import { UIContext } from "../..";
 import { Alert } from "../alert";
 import { Button } from "../button";
-import { UIContext } from "../..";
+import { notification } from "../notification";
 
 const FormField: React.FC<FieldData> = (field) => {
   const { UITexts } = React.useContext(UIContext);
@@ -39,9 +39,9 @@ const FormField: React.FC<FieldData> = (field) => {
                 ...props,
                 id: field.id,
                 name: field.id,
-                placeholder: !field.instance?.settings.hidePlaceholders
-                  ? field.placeholder || UITexts.form.fill_field
-                  : "",
+                placeholder: field.instance?.settings.hidePlaceholders
+                  ? ""
+                  : field.placeholder || UITexts.form.fill_field,
                 instance: field.instance,
                 className: [
                   props?.className,
@@ -345,7 +345,7 @@ export const Form: IForm = Object.assign(InternalForm, {
 });
 
 export { default as Field } from "./field";
-export * from "./types";
 export * from "./instance";
-export * from "./validator";
+export * from "./types";
 export { updateMobxKeystoneModelFields } from "./utils";
+export * from "./validator";

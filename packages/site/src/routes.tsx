@@ -1,5 +1,5 @@
-import React from "react";
 import type { Route } from "@tkcrm/ui";
+import React from "react";
 
 const NotFound = React.lazy(() => import("./components/NotFound"));
 

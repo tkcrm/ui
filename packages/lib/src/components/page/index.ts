@@ -1,7 +1,7 @@
 import React from "react";
-import { PageErrorProps, PageError } from "./error";
-import { PageHeadingProps, PageHeading } from "./heading";
-import { PageWrapperProps, PageWrapper } from "./wrapper";
+import { PageError, PageErrorProps } from "./error";
+import { PageHeading, PageHeadingProps } from "./heading";
+import { PageWrapper, PageWrapperProps } from "./wrapper";
 
 interface IPage {
   Error: React.FC<PageErrorProps>;

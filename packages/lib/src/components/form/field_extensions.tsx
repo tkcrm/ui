@@ -1,13 +1,11 @@
-import * as React from "react";
-
 import Field from "./field";
+import { InputValidate } from "./field/input";
 import type {
   FieldTypes,
   FieldValidate,
   MixinCallback,
   MixinNames,
 } from "./types";
-import { InputValidate } from "./field/input";
 
 export const field_types: Record<FieldTypes, JSX.Element> = {
   number: <Field.Input.InputNumber />,

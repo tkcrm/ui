@@ -1,13 +1,13 @@
-import * as React from "react";
-import classNames from "classnames";
-import RCNotification from "rc-notification";
-import { NotificationInstance } from "rc-notification/lib/Notification";
 import {
   CheckCircleIcon,
   ExclamationTriangleIcon,
   InformationCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import classNames from "classnames";
+import RCNotification from "rc-notification";
+import { NotificationInstance } from "rc-notification/lib/Notification";
+import * as React from "react";
 import { capitalizeFirstLetter } from "../..";
 
 type NotificationTypes = "error" | "success" | "info" | "warning" | "custom";
@@ -119,7 +119,7 @@ export const notification: INotification = ({
   if (typeof duration === "number") {
     duration = duration / 1000;
   }
-  if (typeof duration === "undefined") {
+  if (duration === undefined) {
     duration = 2;
   }
 
@@ -152,7 +152,7 @@ export const notification: INotification = ({
         </div>
       </div>
     ),
-    closable: closeIcon !== undefined ? closeIcon : true,
+    closable: closeIcon === undefined ? true : closeIcon,
     duration,
   });
 };

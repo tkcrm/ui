@@ -1,7 +1,7 @@
+import { Bars3Icon } from "@heroicons/react/24/outline";
+import { availableRoutes, Preloader } from "@tkcrm/ui";
 import { Suspense, useState } from "react";
 import { useRoutes } from "react-router-dom";
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import { Preloader, availableRoutes } from "@tkcrm/ui";
 
 import { routes } from "@/routes";
 import Sidebar from "./ui/sidebar";

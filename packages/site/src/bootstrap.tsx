@@ -1,6 +1,6 @@
+import { ErrorBoundary, UIContext, UIContextClass } from "@tkcrm/ui";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ErrorBoundary, UIContext, UIContextClass } from "@tkcrm/ui";
 
 import App from "./components/App";
 import { routes } from "./routes";

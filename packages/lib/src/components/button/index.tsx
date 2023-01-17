@@ -1,9 +1,9 @@
+import classNames from "classnames";
 import * as React from "react";
 import { Link } from "react-router-dom";
-import classNames from "classnames";
 
-import { Spin } from "../spin";
 import { SizeType } from "../../types/commonComponents";
+import { Spin } from "../spin";
 
 export type ButtonType = "button" | "link";
 

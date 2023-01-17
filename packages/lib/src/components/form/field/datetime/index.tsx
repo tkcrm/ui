@@ -1,6 +1,6 @@
-import * as React from "react";
 import classNames from "classnames";
 import dayjs from "dayjs";
+import * as React from "react";
 
 import { SizeType } from "../../../../types/commonComponents";
 import { getSize } from "../utils";
