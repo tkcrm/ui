@@ -421,7 +421,7 @@ const formInstance = getFormInstance(
   {},
   {
     formMessages: {
-      form_validation_error_title: "Validating rror!",
+      form_validation_error_title: "Validating error!",
       form_validation_error_description: "Form validating error",
     },
   }
