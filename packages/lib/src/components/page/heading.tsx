@@ -5,7 +5,7 @@ import { UIContext } from "../..";
 import { Breadcrumb, BreadcrumbItem } from "../breadcrumb";
 
 export interface PageHeadingProps {
-  title?: string;
+  title?: string | null;
   className?: string;
   extra?: React.ReactNode;
 }

@@ -5,10 +5,11 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import classNames from "classnames";
-import RCNotification from "rc-notification";
-import { NotificationInstance } from "rc-notification/lib/Notification";
 import * as React from "react";
-import { capitalizeFirstLetter } from "../..";
+import { capitalizeFirstLetter } from "../../";
+
+import RCNotification from "./rc-notification";
+import type { NotificationInstance } from "./rc-notification/Notification";
 
 type NotificationTypes = "error" | "success" | "info" | "warning" | "custom";
 

@@ -3,7 +3,6 @@ import type { FieldProps as RCFieldProps } from "rc-field-form/lib/Field";
 import React from "react";
 import type { ButtonProps } from "../button";
 import type { FormInstance } from "./instance";
-
 export interface FormSettings {
   debug?: boolean;
   hidePlaceholders?: boolean;
@@ -84,7 +83,7 @@ export interface FieldData extends Omit<FieldBaseProps, "name"> {
   name: FieldNamePath;
   label: string | React.ReactNode;
   type: FieldTypes;
-  placeholder?: string;
+  placeholder?: string | null;
   required?: boolean;
   hidden?: boolean;
   value?: any;
