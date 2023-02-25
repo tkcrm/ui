@@ -1,7 +1,6 @@
+import typescript from "@rollup/plugin-typescript";
 import pluginReact from "@vitejs/plugin-react";
 import path from "node:path";
-//import typescript2 from "rollup-plugin-typescript2";
-import typescript from "@rollup/plugin-typescript";
 import { defineConfig } from "vite";
 
 import { peerDependencies } from "./package.json";
@@ -27,13 +26,12 @@ export default defineConfig({
           lodash: "lodash",
         },
       },
+      plugins: [typescript()],
     },
   },
   plugins: [
     pluginReact({
       jsxRuntime: "classic",
     }),
-    typescript(),
-    //{ ...typescript2({}), apply: "build", enforce: "pre" },
   ],
 });
