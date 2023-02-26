@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": false,
     "experimentalDecorators": true,
     "target": "ESNext",
     "useDefineForClassFields": true,
@@ -14,7 +15,6 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "outDir": "./dist",

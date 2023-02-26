@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "main": "./src/index.ts",
-  "type": "module",
   "dependencies": {
     "@headlessui/react": "^1.7.12",
     "@heroicons/react": "^2.0.16",
+    "@tkcrm/ui": "file:../lib/dist",
     "history": "^5.3.0",
     "i18next": "^22.4.10",
     "i18next-browser-languagedetector": "^7.0.1",
@@ -31,6 +31,7 @@
     "cssnano": "^5.1.15",
     "postcss-import": "^15.1.0",
     "tailwindcss": "^3.2.7",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.5",
     "vite": "^4.1.4"
   },
@@ -38,7 +39,8 @@
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint src/** --ignore-pattern '/src/assets/*'"
+    "lint": "eslint src/** --ignore-pattern '/src/assets/*'",
+    "link": "npm link @tkcrm/ui && npm i"
   },
   "browserslist": {
     "production": [
