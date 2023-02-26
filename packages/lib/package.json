@@ -1,6 +1,6 @@
 {
   "name": "@tkcrm/ui",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "description": "Tailwind React UI components",
   "title": "TKCRM UI",
   "keywords": [
@@ -38,7 +38,12 @@
   "module": "index.es.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "style.css",
+    "index.cjs.js",
+    "index.es.js",
+    "LICENSE",
+    "README.md"
   ],
   "sideEffects": false,
   "peerDependencies": {

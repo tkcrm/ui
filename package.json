@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "lib:build": "cd packages && cd lib && npm run build",
-    "lib:publish": "cd packages/lib && npm publish --access public",
+    "lib:publish": "cd packages/lib/dist && npm publish --access public",
     "site:start": "npm start --prefix packages/site",
     "site:build": "cd packages && cd site && npm run build",
     "lint": "cd packages && cd lib && npm run lint"
