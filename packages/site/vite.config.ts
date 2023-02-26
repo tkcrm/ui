@@ -1,7 +1,7 @@
+import mdx from "@mdx-js/rollup";
+import react from "@vitejs/plugin-react";
 import * as path from "node:path";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import mdx from "@mdx-js/rollup";
 
 import postcss from "./postcss.config";
 
@@ -22,7 +22,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
-      "@tkcrm/ui": path.resolve(__dirname, "../lib/src"),
+      "@tkcrm/ui": path.resolve(__dirname, "../lib/dist"),
     },
   },
 });

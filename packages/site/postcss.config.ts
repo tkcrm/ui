@@ -1,7 +1,7 @@
+import * as autoprefixer from "autoprefixer";
+import * as cssnano from "cssnano";
 import postcssImport from "postcss-import";
 import tailwind from "tailwindcss";
-import autoprefixer from "autoprefixer";
-import cssnano from "cssnano";
 import tailwindConfig from "./tailwind.config";
 
 export default {

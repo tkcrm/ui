@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "importHelpers": true,
     "declaration": true,
-    "declarationDir": "./dist",
+    "declarationDir": "./dist/dist",
     "rootDir": "./src",
     "strict": true,
     "noImplicitAny": true,

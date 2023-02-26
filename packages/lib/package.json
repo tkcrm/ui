@@ -1,6 +1,6 @@
 {
   "name": "@tkcrm/ui",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Tailwind React UI components",
   "title": "TKCRM UI",
   "keywords": [
@@ -20,8 +20,8 @@
   ],
   "scripts": {
     "quick-build": "tsc",
-    "copy-root-files": "shx cp ../../README.md . && shx cp ../../LICENSE .",
-    "build": "npm run quick-build && npm run copy-root-files && vite build"
+    "copy-root-files": "shx cp ../../README.md ./dist && shx cp ../../LICENSE ./dist && shx cp ./package.json ./dist",
+    "build": "npm run quick-build && vite build && npm run copy-root-files"
   },
   "repository": {
     "type": "git",
@@ -33,27 +33,12 @@
     "url": "https://github.com/tkcrm/ui/issues"
   },
   "homepage": "https://github.com/tkcrm/ui#readme",
-  "source": "./src/index.ts",
-  "exports": {
-    "./package.json": "./package.json",
-    "./dist/style.css": "./dist/style.css",
-    ".": {
-      "import": {
-        "webpack": "./dist/index.es.js",
-        "default": "./dist/index.es.mjs"
-      },
-      "require": "./dist/index.cjs.js",
-      "script": "./dist/index.cjs.js",
-      "default": "./dist/index.es.mjs"
-    }
-  },
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "dist/dist/index.d.ts",
+  "source": "src/index.ts",
+  "main": "index.cjs.js",
+  "module": "index.es.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "LICENSE",
-    "README.md"
+    "dist"
   ],
   "sideEffects": false,
   "peerDependencies": {
