@@ -1,8 +1,7 @@
-import path from "node:path";
-import typescript2 from "rollup-plugin-typescript2";
-import visualizer from "rollup-plugin-visualizer";
-import { defineConfig } from "vite";
+import typescript from "@rollup/plugin-typescript";
 import pluginReact from "@vitejs/plugin-react";
+import path from "node:path";
+import { defineConfig } from "vite";
 
 import { peerDependencies } from "./package.json";
 
@@ -16,7 +15,7 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: [...Object.keys(peerDependencies)],
+      external: Object.keys(peerDependencies),
       output: {
         globals: {
           react: "React",
@@ -27,13 +26,12 @@ export default defineConfig({
           lodash: "lodash",
         },
       },
+      plugins: [typescript()],
     },
   },
   plugins: [
     pluginReact({
       jsxRuntime: "classic",
     }),
-    { ...typescript2({}), apply: "build", enforce: "pre" },
-    visualizer(),
   ],
 });
